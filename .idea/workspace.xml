@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15305823-9ebc-4b9f-9300-58027522f93b" name="Default" comment="" />
+    <list default="true" id="15305823-9ebc-4b9f-9300-58027522f93b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Women-who-code/closest_k.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/facebook/__init__.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/amazon/A9_sdet.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/amazon/amazon_interview_questions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/amazon/find_merg_in_2_sorted_intervals.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/nutanix/interview.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facebook_medium/max_size_sub_array_sum_equals_k.py" afterPath="$PROJECT_DIR$/facebook/max_size_sub_array_sum_equals_k.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facebook_medium/merge_k_sorted_lists.py" afterPath="$PROJECT_DIR$/facebook/merge_k_sorted_lists.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facebook_medium/pow.py" afterPath="$PROJECT_DIR$/facebook/pow.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facebook_medium/remove_invalid_parathesis.py" afterPath="$PROJECT_DIR$/facebook/remove_invalid_parathesis.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facebook_medium/roman_to_integer.py" afterPath="$PROJECT_DIR$/facebook/roman_to_integer.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facebook_medium/subsets_of_list.py" afterPath="$PROJECT_DIR$/facebook/subsets_of_list.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,9 +24,19 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="first_k_high_freq_word_count.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Arrays_and_Strings/first_k_high_freq_word_count.py">
+    <leaf>
+      <file leaf-file-name="closest_k.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Women-who-code/closest_k.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="571">
+              <caret line="54" column="26" lean-forward="false" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="flip_a_binary_tree.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/flip_a_binary_tree.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -21,88 +45,78 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="move_nonzero_to_left.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/facebook/move_nonzero_to_left.py">
+      <file leaf-file-name="isBST.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/isBST.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="topk.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IK-Homwork/sorting/topk.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="-345">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fibnacci.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/facebook/fibnacci.py">
+      <file leaf-file-name="largest_bst_in_binarytree.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/largest_bst_in_binarytree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
+            <state relative-caret-position="-735">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="interview.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/nutanix/interview.py">
+      <file leaf-file-name="lca.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/lca.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="17" lean-forward="true" selection-start-line="0" selection-start-column="17" selection-end-line="120" selection-end-column="66" />
+            <state relative-caret-position="-450">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reverse_index.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="reverse_index.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/IK-Homwork/strings/reverse_index.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
+            <state relative-caret-position="-965">
               <caret line="45" column="11" lean-forward="true" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="most_repeating_number.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/facebook/most_repeating_number.py">
+      <file leaf-file-name="print_all_paths.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/print_all_paths.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
-              <caret line="49" column="18" lean-forward="false" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+            <state relative-caret-position="-330">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ip_address_match.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/facebook/ip_address_match.py">
+      <file leaf-file-name="rebuild_tree_given_inorder_preorder.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/rebuild_tree_given_inorder_preorder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="3" lean-forward="true" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+            <state relative-caret-position="-675">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2_sum.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/facebook/2_sum.py">
+      <file leaf-file-name="tree_iterator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/tree_iterator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
-              <caret line="82" column="18" lean-forward="true" selection-start-line="82" selection-start-column="18" selection-end-line="82" selection-end-column="18" />
+            <state relative-caret-position="-202">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="merge_2_ordered_lists.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/facebook/merge_2_ordered_lists.py">
+      <file leaf-file-name="print_post_order_binary_tree_without_rec.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/print_post_order_binary_tree_without_rec.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -126,10 +140,12 @@
       <find>getWords</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Sorting_and_Searching/10.1_merge_two_sorted_arrays.py" />
         <option value="$PROJECT_DIR$/facebook/meeting_rooms2.py" />
         <option value="$PROJECT_DIR$/IK-Homwork/sorting/quick_select.py" />
         <option value="$PROJECT_DIR$/IK-Homwork/sorting/Merge_k_sorted_arrays.py" />
@@ -180,14 +196,16 @@
         <option value="$PROJECT_DIR$/facebook/most_repeating_number.py" />
         <option value="$PROJECT_DIR$/facebook/2_sum.py" />
         <option value="$PROJECT_DIR$/nutanix/interview.py" />
+        <option value="$PROJECT_DIR$/Women-who-code/closest_k.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="67" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="800" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -203,6 +221,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -213,23 +232,34 @@
             <path>
               <item name="JobSearch" type="b2602c69:ProjectViewProjectNode" />
               <item name="JobSearch" type="462c0819:PsiDirectoryNode" />
-              <item name="facebook_medium" type="462c0819:PsiDirectoryNode" />
+              <item name="IK-Homwork" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="JobSearch" type="b2602c69:ProjectViewProjectNode" />
               <item name="JobSearch" type="462c0819:PsiDirectoryNode" />
-              <item name="hackerrank" type="462c0819:PsiDirectoryNode" />
+              <item name="IK-Homwork" type="462c0819:PsiDirectoryNode" />
+              <item name="strings" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="JobSearch" type="b2602c69:ProjectViewProjectNode" />
               <item name="JobSearch" type="462c0819:PsiDirectoryNode" />
-              <item name="nutanix" type="462c0819:PsiDirectoryNode" />
+              <item name="IK-Homwork" type="462c0819:PsiDirectoryNode" />
+              <item name="trees" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JobSearch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JobSearch" type="462c0819:PsiDirectoryNode" />
+              <item name="trees_and_graphs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JobSearch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JobSearch" type="462c0819:PsiDirectoryNode" />
+              <item name="Women-who-code" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -247,6 +277,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/facebook" />
       <recent name="$PROJECT_DIR$/IK-Homwork/sorting" />
       <recent name="$PROJECT_DIR$/Arrays_and_Strings" />
       <recent name="$PROJECT_DIR$/Sorting_and_Searching" />
@@ -264,7 +295,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.most_repeating_number">
+  <component name="RunManager" selected="Python.closest_k">
     <configuration name="Tower_of_hanoi" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -282,6 +313,23 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="closest_k" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Women-who-code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="JobSearch" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Women-who-code/closest_k.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="emp_manager_pair" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -295,23 +343,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="JobSearch" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Linkedin/emp_manager_pair.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="implement_stack_using_queue" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/stacks_and_queues" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="JobSearch" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/stacks_and_queues/implement_stack_using_queue.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -351,19 +382,19 @@
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.implement_stack_using_queue" />
-      <item index="1" class="java.lang.String" itemvalue="Python.Tower_of_hanoi" />
-      <item index="2" class="java.lang.String" itemvalue="Python.list_all_subsets" />
-      <item index="3" class="java.lang.String" itemvalue="Python.emp_manager_pair" />
-      <item index="4" class="java.lang.String" itemvalue="Python.most_repeating_number" />
+      <item index="0" class="java.lang.String" itemvalue="Python.Tower_of_hanoi" />
+      <item index="1" class="java.lang.String" itemvalue="Python.list_all_subsets" />
+      <item index="2" class="java.lang.String" itemvalue="Python.emp_manager_pair" />
+      <item index="3" class="java.lang.String" itemvalue="Python.most_repeating_number" />
+      <item index="4" class="java.lang.String" itemvalue="Python.closest_k" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.most_repeating_number" />
-        <item index="1" class="java.lang.String" itemvalue="Python.emp_manager_pair" />
-        <item index="2" class="java.lang.String" itemvalue="Python.list_all_subsets" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Tower_of_hanoi" />
-        <item index="4" class="java.lang.String" itemvalue="Python.implement_stack_using_queue" />
+        <item index="0" class="java.lang.String" itemvalue="Python.closest_k" />
+        <item index="1" class="java.lang.String" itemvalue="Python.most_repeating_number" />
+        <item index="2" class="java.lang.String" itemvalue="Python.emp_manager_pair" />
+        <item index="3" class="java.lang.String" itemvalue="Python.list_all_subsets" />
+        <item index="4" class="java.lang.String" itemvalue="Python.Tower_of_hanoi" />
       </list>
     </recent_temporary>
   </component>
@@ -381,19 +412,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="67" width="1440" height="800" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26041666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11263736" sideWeight="0.5548611" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16895604" sideWeight="0.5576389" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16895604" sideWeight="0.44236112" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11263736" sideWeight="0.4451389" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39867842" sideWeight="0.49557522" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -412,151 +443,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/linedlists_queues_stacks/zip_2_linkedlists.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1260">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/linedlists_queues_stacks/swap_kth_nodes_in_ll.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-632">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LinkedList/merge_2_sorted_lists.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-35">
-          <caret line="3" column="24" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/graphs/word_ladders.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="29" column="17" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="29" selection-end-column="17" />
-          <folding>
-            <element signature="e#1101#1119#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/graphs/word_ladder2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/graphs/string_transformation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="103" lean-forward="true" selection-start-line="0" selection-start-column="1" selection-end-line="12" selection-end-column="103" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/graphs/string_transformation2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="40" column="39" lean-forward="true" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
-          <folding>
-            <element signature="e#653#682#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/graphs/knights_tour_chess_board.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/graphs/shortest_path_in_2d_with_keys_and_doors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="79" column="0" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facebook/find_no_of_1s.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facebook/find_duplicates_in_an_array.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3">
-          <caret line="4" column="85" lean-forward="false" selection-start-line="4" selection-start-column="85" selection-end-line="4" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/linedlists_queues_stacks/longest_substring_with_matching_parantheses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="55" column="21" lean-forward="true" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stacks_and_queues/queue.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stacks_and_queues/implement_queue_using_stack.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-108">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stacks_and_queues/implement_stack_using_queue.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/recursion/n_queens.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/recursion/palindromic_decomposition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/IK-Homwork/recursion/find_all_wellformed_brackets.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -564,15 +454,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-223">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/facebook_medium/remove_invalid_parathesis.py">
+    <entry file="file://$PROJECT_DIR$/facebook/remove_invalid_parathesis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -580,7 +468,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -596,7 +483,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -604,7 +490,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -612,7 +497,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -620,15 +504,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/recursion/wild_card_string_gen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -636,7 +511,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -644,15 +518,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="40" lean-forward="false" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/bfs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -660,7 +525,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="31" column="49" lean-forward="false" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -668,7 +532,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -676,7 +539,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -684,7 +546,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -692,15 +553,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-54">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/facebook_medium/roman_to_integer.py">
+    <entry file="file://$PROJECT_DIR$/facebook/roman_to_integer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -708,7 +567,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-457">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -716,7 +574,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1087">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -724,7 +581,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -752,10 +608,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/strings/reverse_index.py">
+    <entry file="file://$PROJECT_DIR$/facebook/fibnacci.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="45" column="11" lean-forward="true" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nutanix/interview.py" />
+    <entry file="file://$PROJECT_DIR$/amazon/find_merg_in_2_sorted_intervals.py" />
+    <entry file="file://$PROJECT_DIR$/amazon/amazon_interview_questions.py" />
+    <entry file="file://$PROJECT_DIR$/amazon/A9_sdet.py" />
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/sorting/topk.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -764,6 +632,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="609">
           <caret line="49" column="18" lean-forward="false" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facebook/move_nonzero_to_left.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -792,15 +668,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/facebook/move_nonzero_to_left.py">
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/strings/regex_matcher.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="-214">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IK-Homwork/sorting/topk.py">
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees_timed_test/serialization_deserialization.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -808,18 +684,122 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/facebook/fibnacci.py">
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees_timed_test/kth_smallest_element_of_bst.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nutanix/interview.py">
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees_timed_test/height_of_K-ary_tree.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="17" lean-forward="true" selection-start-line="0" selection-start-column="17" selection-end-line="120" selection-end-column="66" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees_timed_test/given_a_shorted_array_build_BST.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/recursion/wild_card_string_gen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/bfs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/flip_a_binary_tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/isBST.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-345">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/largest_bst_in_binarytree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-735">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/print_all_paths.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-330">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/rebuild_tree_given_inorder_preorder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-675">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/tree_iterator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-202">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/print_post_order_binary_tree_without_rec.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Women-who-code/closest_k.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="571">
+          <caret line="54" column="26" lean-forward="false" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/trees/lca.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-450">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IK-Homwork/strings/reverse_index.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-965">
+          <caret line="45" column="11" lean-forward="true" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
           <folding />
         </state>
       </provider>
