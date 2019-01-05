@@ -1,0 +1,459 @@
+create table emp(  
+  empno    int(4),  
+  ename    varchar(10),  
+  job      varchar(9),  
+  mgr      int(4),  
+  hiredate date,  
+  sal      int(7),  
+  comm     int(7),  
+  deptno   int(2),  
+  constraint pk_emp primary key (empno),  
+  constraint fk_deptno foreign key (deptno) references dept (deptno)  
+)
+
+
+create table dept(  
+  deptno     int(2),  
+  dname      varchar(14),  
+  loc        varchar(13),  
+  constraint pk_dept primary key (deptno)  
+)
+
+
+insert into DEPT (DEPTNO, DNAME, LOC)
+values(10, 'ACCOUNTING', 'NEW YORK')
+
+
+ insert into emp  
+values(  
+ 7839, 'KING', 'PRESIDENT', null,  '1981-11-17',  5000, null, 10 )
+
+ insert into emp  
+values(  
+ 7698, 'BLAKE', 'MANAGER', 7839,  '1981-05-01', 2850, null, 30  )
+
+ insert into emp  
+values(  
+ 7782, 'CLARK', 'MANAGER', 7839,  '1981-06-09', 2450, null, 10 )
+
+
+
+
+ insert into emp  
+values(  
+ 7566, 'JONES', 'MANAGER', 7839,  '1981-04-02',2975, null, 20 ),
+(  7788, 'SCOTT', 'ANALYST', 7566,  '1982-12-09',3000, null, 20  ),
+( 7902, 'FORD', 'ANALYST', 7566,  '1981-12-03',3000, null, 20  ),
+(  7369, 'SMITH', 'CLERK', 7902,  '1980-12-17', 800, null, 20  ),
+(  7499, 'ALLEN', 'SALESMAN', 7698,  '1981-02-20',1600, 300, 30  ),
+(  7521, 'WARD', 'SALESMAN', 7698,  '1981-02-22',1250, 500, 30 ),
+(  7654, 'MARTIN', 'SALESMAN', 7698,  '1981-09-28',1250, 1400, 30  ),
+(  7844, 'TURNER', 'SALESMAN', 7698,  '1981-08-08', 1500, 0, 30  ),
+(  7876, 'ADAMS', 'CLERK', 7788,  '1987-07-13', 1100, null, 20  ),
+(  7900, 'JAMES', 'CLERK', 7698,  '1981-12-03', 950, null, 30  ),
+(  7934, 'MILLER', 'CLERK', 7782,  '1982-01-23',1300, null, 10  )
+;
+
+SELECT * FROM (
+  SELECT
+    RANK() OVER (ORDER BY hiredate asc ) AS ranking,
+    empno,
+    ename
+  FROM emp
+)AS foo
+WHERE ranking <= 10;
+
+* table of students */
+  create table student
+  ( sno integer,
+    sname varchar(10),
+    age integer
+  )
+
+  /* table of courses */
+  create table courses
+  ( cno varchar(5),
+    title varchar(10),
+    credits integer
+  )
+  
+  /* table of professors */
+  create table professor
+  ( lname varchar(10),
+    dept varchar(10),
+    salary integer,
+    age integer
+  )
+
+  /* table of students and the courses they take */
+  create table take
+  ( sno integer,
+    cno varchar(5)
+  )
+
+  /* table of professors and the courses they teach */
+  create table teach
+  ( lname varchar(10),
+    cno varchar(5)
+  )
+
+
+
+insert into student values (1,'AARON',20);
+  insert into student values (2,'CHUCK',21);
+  insert into student values (3,'DOUG',20);
+  insert into student values (4,'MAGGIE',19);
+  insert into student values (5,'STEVE',22);
+  insert into student values (6,'JING',18);
+  insert into student values (7,'BRIAN',21);
+  insert into student values (8,'KAY',20);
+  insert into student values (9,'GILLIAN',20);
+  insert into student values (10,'CHAD',21);
+
+
+insert into courses values ('CS112','PHYSICS',4);
+  insert into courses values ('CS113','CALCULUS',4);
+  insert into courses values ('CS114','HISTORY',4);
+  
+  insert into professor values ('CHOI','SCIENCE',400,45);
+  insert into professor values ('GUNN','HISTORY',300,60);
+  insert into professor values ('MAYER','MATH',400,55);
+  insert into professor values ('POMEL','SCIENCE',500,65);
+  insert into professor values ('FEUER','MATH',400,40);
+  
+  insert into take values (1,'CS112');
+  insert into take values (1,'CS113');
+  insert into take values (1,'CS114');
+  insert into take values (2,'CS112');
+  insert into take values (3,'CS112');
+  insert into take values (3,'CS114');
+  insert into take values (4,'CS112');
+  insert into take values (4,'CS113');
+  insert into take values (5,'CS113');
+  insert into take values (6,'CS113');
+  insert into take values (6,'CS114');
+
+
+  insert into teach values ('CHOI','CS112');
+  insert into teach values ('CHOI','CS113');
+  insert into teach values ('CHOI','CS114');
+  insert into teach values ('POMEL','CS113');
+  insert into teach values ('MAYER','CS112');
+  insert into teach values ('MAYER','CS114');
+
+
+mysql> select * from students;
+ERROR 1146 (42S02): Table 'kr_practice.students' doesn't exist
+mysql> select * from student;
++------+---------+------+
+| sno  | sname   | age  |
++------+---------+------+
+|    1 | AARON   |   20 |
+|    2 | CHUCK   |   21 |
+|    3 | DOUG    |   20 |
+|    4 | MAGGIE  |   19 |
+|    5 | STEVE   |   22 |
+|    6 | JING    |   18 |
+|    7 | BRIAN   |   21 |
+|    8 | KAY     |   20 |
+|    9 | GILLIAN |   20 |
+|   10 | CHAD    |   21 |
++------+---------+------+
+10 rows in set (0.00 sec)
+
+mysql> select * from courses;
++-------+----------+---------+
+| cno   | title    | credits |
++-------+----------+---------+
+| CS112 | PHYSICS  |       4 |
+| CS113 | CALCULUS |       4 |
+| CS114 | HISTORY  |       4 |
++-------+----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from professor;
++-------+---------+--------+------+
+| lname | dept    | salary | age  |
++-------+---------+--------+------+
+| CHOI  | SCIENCE |    400 |   45 |
+| GUNN  | HISTORY |    300 |   60 |
+| MAYER | MATH    |    400 |   55 |
+| POMEL | SCIENCE |    500 |   65 |
+| FEUER | MATH    |    400 |   40 |
++-------+---------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from take;
++------+-------+
+| sno  | cno   |
++------+-------+
+|    1 | CS112 |
+|    1 | CS113 |
+|    1 | CS114 |
+|    2 | CS112 |
+|    3 | CS112 |
+|    3 | CS114 |
+|    4 | CS112 |
+|    4 | CS113 |
+|    5 | CS113 |
+|    6 | CS113 |
+|    6 | CS114 |
++------+-------+
+11 rows in set (0.00 sec)
+
+mysql> select * from teach;
++-------+-------+
+| lname | cno   |
++-------+-------+
+| CHOI  | CS112 |
+| CHOI  | CS113 |
+| CHOI  | CS114 |
+| POMEL | CS113 |
+| MAYER | CS112 |
+| MAYER | CS114 |
++-------+-------+
+6 rows in set (0.00 sec)
+
+1) You want to find students who do not take CS112
+
+select s.sno
+     , s.sname
+  from take t
+       left join student s on (s.sno = t.sno)
+ group by s.sno, s.sname
+ having max(case when t.cno = 'CS112' then 1 else 0 end) = 0
+  ;
+
+select s.sno
+     , s.sname
+     , max( case when cno = 'CS112' then 1 else 0 end) as bool
+  from take t
+       left join student s on (s.sno = t.sno)
+ group by s.sno, s.sname
+ having bool = 0
+  ;
+
+  2) You want to find students who take CS112 or CS114 but not both
+
+select s.sno, s.sname
+from student s
+   left join take t on t.sno = s.sno
+group by s.sno, s.sname
+having sum(case when t.cno in ('CS112','CS114') then 1 else 0 end) = 1
+;
+
+
+3) You want to find students who take CS112 and no other courses
+
+# original/traditional/ less efficient/ mutliple passes
+
+select s.sno, s.sname
+from student s
+   join take t on t.sno = s.sno
+where 
+ t.sno not in ( select tt.sno from take tt where tt.cno != 'CS112'
+                  )
+;
+
+
+# CASE
+select s.sno, s.sname
+from student s
+   left join take t on t.sno = s.sno
+group by s.sno, s.sname
+having sum(case when t.cno in ('CS112') then 1 else 2 end) = 1
+;
+
+
+4) You want to find the students who take at most two courses.
+
+select s.sno, s.sname
+from student s
+    join take t on t.sno = s.sno
+group by s.sno, s.sname
+having count(*) <=2
+;
+
+5) You want to find students who are older than at most two other students
+
+# below 2 approaches are preferred, discuss which has less scans of the table
+select 
+       s.sno, s.sname
+from student s
+where 2 <= ( select count(*) from student ss where ss.age > s.age)
+
+select s1.*
+ from student s1
+  where 2 >= ( select count(*)
+          from student s2
+          where s2.age < s1.age )
+
+
+# I guess 3 self joins is preferred as it is guaranteed 3 scans, compared to 
+# n scans ( n is the 
+# logic is look for student not in age gap of 3 or more
+
+
+select s.sno, s.sname
+from student s
+where s.sno not in
+(
+select s1.sno
+from student s1
+    , student s2
+    , student s3
+    , student s4
+where s1.age > s2.age
+and s2.age > s3.age
+and s3.age > s4.age
+) 
+;
+
+6) You want to find students who take at least two courses.
+
+select s.sno, s.sname
+from student s
+    , take t
+where s.sno = t.sno
+group by s.sno, s.sname
+having count(*) >=2
+;
+
+7) You want to find students who take both CS112 and CS114. The students may take other courses, but they must take CS112 and CS114 as well.
+
+# preferred
+
+select s.sno, s.sname
+from student s
+  , take t
+where s.sno = t.sno
+group by s.sno, s.sname
+having sum( case when t.cno in ('CS112','CS114') then 1 else 0 end ) =2
+;
+
+#traditional 
+
+select s.sno,s.sname
+from student s
+    , take t
+where s.sno = t.sno
+and t.cno in ('CS112','CS114')
+group by s.sno, s.sname
+having min(t.cno) != max(t.cno) 
+;
+
+8) Find students who are older than at least two other students.
+
+select s.sno, s.sname
+from student s
+where 2 <= ( select count(*) from student s1 where s.age >= s1.age) ;
+
+
+
+9) Find professors who teach exactly one course.
+
+select t.lname
+from teach t
+group by t.lname
+having count(*) = 1
+;
+
+
+
+10) You want to find students who take only CS112 and CS114 (exactly those two courses and no other courses)
+
+select s.sno, s.sname
+from student s
+   , take t
+where t.sno = s.sno
+group by s.sno, s.sname
+having sum( case when t.cno in ('CS112','CS114') then 1 else -1 end) = 2
+;
+
+
+select s.sno, s.sname
+from student s
+   , take t
+where t.sno = s.sno
+group by s.sno, s.sname
+having count(*) = 2
+and max( case when t.cno in ('CS112') then 1 else 0 end) + 
+max(case when t.cno in ('CS114') then 1 else 0 end) = 2
+;
+
+
+
+11) You want to find students who are older than exactly two other students. Another way of stating the problem is that you want to find the third youngest student(s)
+
+# exactly =, older than  means main class will be greater than sub class 
+
+select s.sno, s.sname
+from student s
+where 2 = (select count(*) from student s1 where s1.age < s.age)
+group by s.sno, s.sname
+limit 1;
+
+select s1.*,
+         (select count(*) from student s2
+           where s2.age < s1.age) as cnt
+    from student s1
+    order by 4
+    ;
+
+    +------+---------+------+------+
+| sno  | sname   | age  | cnt  |
++------+---------+------+------+
+|    6 | JING    |   18 |    0 |
+|    4 | MAGGIE  |   19 |    1 |
+|    1 | AARON   |   20 |    2 |
+|    3 | DOUG    |   20 |    2 |
+|    8 | KAY     |   20 |    2 |
+|    9 | GILLIAN |   20 |    2 |
+|    2 | CHUCK   |   21 |    6 |
+|    7 | BRIAN   |   21 |    6 |
+|   10 | CHAD    |   21 |    6 |
+|    5 | STEVE   |   22 |    9 |
++------+---------+------+------+
+
+12) You want to find students who take all courses.
+
+select s.sno, s.sname
+from student s
+  , take t
+  , courses c
+where c.cno = t.cno
+and s.sno = t.sno
+group by s.sno, s.sname
+having count(*) = ( select count(*) from courses)
+;
+ 
+
+
+13) Find students who are older than any other students.
+
+select s.sno, s.sname
+from student s
+where s.age >= ALL( select age from student)
+;
+
+select *
+from student
+where age = (select max(age) from student)
+;
+
+14) find students who is youngest
+
+select s.*
+from student s
+where s.age <= ALL(select age from student)
+;
+
+select *
+from student
+where age = ( select min(age) from student)
+;
+
+
+
+
+

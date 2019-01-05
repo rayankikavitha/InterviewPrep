@@ -1,0 +1,425 @@
+#*********************************************************
+CREATE TABLE PRODUCTS (
+          PRODUCT_ID INTEGER PRIMARY KEY
+        , PRODUCT_CLASS_ID  INTEGER
+        ,  BRAND_NAME         VARCHAR(30)
+        ,  PRODUCT_NAME    VARCHAR(30)
+        , PRICE INTEGER
+                ) ;
+
+
+CREATE TABLE STORES (
+  STORE_ID INTEGER PRIMARY KEY
+  , TYPE VARCHAR(30)
+  , NAME VARCHAR(30)
+  , STATE VARCHAR(30)
+  , FIRST_OPENED_DATE DATE
+  , LAST_REMODEL_DATE DATE
+  , AREA_SQFT INTEGER
+  );
+  
+
+CREATE TABLE CUSTOMERS (
+  CUSTOMER_ID INTEGER PRIMARY KEY
+  ,FIRST_NAME VARCHAR(30)
+  ,LAST_NAME VARCHAR(30)
+  ,STATE VARCHAR(30)
+  , BIRTHDATE DATE
+  , EDUCATION VARCHAR(30)
+  , GENDER VARCHAR(30)
+  , DATE_ACCOUNT_OPENED DATE
+  );
+ 
+
+
+ CREATE TABLE SALES(
+   PRODUCT_ID INTEGER 
+   ,STORE_ID INTEGER  
+   ,CUSTOMER_ID INTEGER 
+   ,PROMOTION_ID INTEGER
+   ,STORE_SALES DECIMAL
+   ,STORE_COST DECIMAL
+   ,UNIT_SOLD DECIMAL
+   ,TRANSACTION_DATE DATE
+   );
+
+
+
+# product classes
+# clothes. 1
+# food.    2
+# electronics. 3
+
+# promotion id
+# buy 2 get 1 free - 1
+# 20% off - 2
+# buy 1 get 1 50% off - 3
+
+
+
+
+INSERT INTO products VALUES 
+(1, 1 ,'Kohls', 'shirts', 30)
+,(2, 1 ,'Kohls', 'pants', 40)
+,(3, 2 ,'wholefoods', 'rice', 60)
+,(4, 2 ,'wholefoods', 'wheat', 80)
+,(5, 2 ,'sprouts', 'rice', 50)
+,(6, 2 ,'sprouts', 'wheat', 70)
+,(7, 3 ,'bestbuy', 'television', 1000)
+,(8, 3 ,'bestbuy', 'laptop', 3033)
+,(9, 3 ,'bestbuy', 'washingmachine', 550)
+,(10, 3 ,'officemax', 'laptop', 1200)
+;
+
+
+insert into stores values
+   (1, 'b2b', 'alibaba', 'CA', '2018-01-01',NULL,10000)
+  ,(2, 'b2c', 'amazon', 'WA', '2010-01-01',NULL,200000)
+  ,(3, 'c2c','walmart', 'AZ', '2000-01-01', '2016-01-01', 50000)
+  ,(4, 'c2c', 'target', 'MN', '2005-01-01', '2017-01-01', 35000)
+  ;
+
+
+
+  insert into customers values
+(111, 'Kavitha','Rayanki', 'CA', '1980-05-01', 'masters', 'F','2014-02-01'),
+(222,'Hai','Trihn','CA', '1990-08-01','bachelors','M', '2015-03-01'),
+(445,'Hernandez','Maria','NY','1970-01-01',NULL, 'F','2005-01-01'),
+(446,'Feuer','Alexander ','NY', '1950-09-05','phd','M','2000-01-01'),
+(447,'Lewis','Dan','MN','1950-09-05',NULL, 'M','1970-01-01'),
+(448,'Larsson','Martha','WA','1950-09-05','phd','M','2000-01-01'),
+(450,'Frick','Sue','NY','1950-09-05','phd','M','2000-01-01'),
+(452,'Mendel','Roland ','CA','1960-09-05','phd','F','2000-01-01'),
+(455,'Murphy','Leslie','AZ','1970-09-05','phd','F','2000-01-01'),
+(456,'Choi','Yu','AZ','1992-01-01','phd','M','2010-01-01'),
+(458,'Sommer','Martín ','NV','2005-05-05', 'college', 'M', '2010-01-01')
+ ;
+
+insert into sales values
+1,1,111,,20.0,20000.0,100.0, '2018-01-01'),
+(1,2,111,NULL,10.0,10000,20.0,'2018-02-01'),
+(2,3,111,1,5.0,5000.0,10.0,'2016-01-01'),
+(2,4,111,3,1.0,100.0,100.0,'2017-01-01'),
+(3,4,445,NULL,10.0,100.0,10.0,'2018-02-01'),
+(3,1,445,1,5.0,500.0,50.0,'2018-03-01'),
+(3,3,445,2,26.0,600.0,6.0,'2018-04-01'),
+(4,1,445,3,8.0,800.0,80.0,'2018-05-01'),
+(4,2,445,NULL,4.0,400.0,40.0,'2018-06-01'),
+(4,3,445,1,20.0,4343.0,32.0,'2018-07-01'),
+(4,4,446,2,4.0,5543.0,432.0,'2018-08-01'),
+(4,1,446,3,432.0,432.0,432.0,'2018-09-01'),
+(5,1,446,NULL,1.0,100.0,10.0,'2016-10-01'),
+(6,2,447,1,5.0,555.0,50.0,'2016-11-01'),
+(7,3,447,2,43.0,43.0,43.0,'2016-12-01'),
+(8,4,447,3,90.0,900.0,9.0,'2018-02-01'),
+(9,1,448,NULL,90.0,810.0,9.0,'2018-03-01'),
+(9,2,448,1,543.0,4543.0,80.0,'2018-04-01'),
+(10,1,450,2,432.0,4432.0,43.0,'2018-05-01'),
+(10,2,450,3,43.0,4324.0,43.0,'2017-02-01'),
+(10,3,452,NULL,432.0,432.0,432.0,'2017-03-01'),
+(5,2,452,1,12.0,2131.0,212.0,'2017-04-01'),
+(5,3,452,2,432.0,2112.0,12.0,'2017-05-01'),
+(6,3,452,3,23.0,1212.0,212.0,'2017-06-01'),
+(7,4,452,NULL,21.0,2121.0,21.0,'2017-07-01'),
+(1,1,455,1,43.0,4343.0,43.0,'2017-08-01'),
+(1,2,455,2,12.0,212.0,21.0,'2017-09-01'),
+(1,3,455,3,43.0,4324.0,44.0,'2017-10-01'),
+(1,4,455,NULL,32.0,3232.0,32.0,'2017-11-01'),
+(2,1,456,NULL,12.0,2122.0,12.0,'2015-12-01'),
+(2,2,456,1,546.0,7657.0,76.0,'2016-01-01'),
+(2,3,456,2,543.0,6565.0,65.0,'2018-01-01'),
+(2,4,456,3,99.0,9990.0,10.0,'2017-12-31')
+;
+
+
+
+
+   1) Select youngest and oldest customer who purchased a product.
+   2) for each product, show the % of difference in sales between 2014 and 2015
+   3) list all customers who live in a state orderd by number of unique products they bought
+   4) count the number of products which sold more than 10 units
+   5) Count the number of stores in a state with grand total ? 25000 sq feet  
+   6) Get the areas from which we have the products sold
+
+
+
+1) select youngest and oldest customer who purchased a product by gender
+-------------------------------------------------------------------------
+
+select  gender,min(birthdate) as oldest, max(birthdate) as youngest
+from sales, 
+customers 
+where sales.customer_id = customers.customer_id
+ group by gender;
+--------+------------+------------+
+| gender | oldest     | youngest   |
++--------+------------+------------+
+| F      | 1960-09-05 | 1980-05-01 |
+| M      | 1947-01-01 | 1992-01-01 |
++--------+------------+------------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+select c.gender
+       ,max(case when type = 'o' then concat(c.first_name,' ',c.last_name) end) as oldest
+       ,max(case when type = 'y' then concat(c.first_name,' ',c.last_name) end) as youngest
+from customers c
+,(
+select gender ,min(birthdate) as birthdate,'o' as type
+from sales,
+customers 
+where sales.customer_id = customers.customer_id
+ group by gender
+ union
+ select  gender, max(birthdate) as birthdate ,'y' as type
+from sales, 
+customers 
+where sales.customer_id = customers.customer_id
+ group by gender
+) ss
+where ss.gender = c.gender
+and ss.birthdate = c.birthdate
+group by c.gender
+;
+
++--------+------------------+-----------------+
+| gender | oldest           | youngest        |
++--------+------------------+-----------------+
+| F      | Mendel Roland    | Kavitha Rayanki |
+| M      | Feuer Alexander  | Choi Yu         |
++--------+------------------+-----------------+
+2 rows in set (0.01 sec)
+
+
+
+
+2) for each product show the % of difference in sales between 2014 and 2015
+----------------------------------------------------------------------
+  for our dataset, we can do 2017 and 2018
+
+select product_id
+      , sum(case when year(transaction_date) = '2017' then unit_sold else 0 end) as 2017_cnt
+      , sum(case when year(transaction_date) = '2018' then unit_sold else 0 end) as 2018_cnt
+from sales
+group by product_id
+;
++------------+----------+----------+
+| product_id | 2017_cnt | 2018_cnt |
++------------+----------+----------+
+|          1 |      140 |      120 |
+|          2 |      110 |       65 |
+|          3 |        0 |       66 |
+|          4 |        0 |     1016 |
+|          5 |      224 |        0 |
+|          6 |      212 |        0 |
+|          7 |       21 |        0 |
+|          8 |        0 |        9 |
+|          9 |        0 |       89 |
+|         10 |      475 |       43 |
++------------+----------+----------+
+10 rows in set (0.00 sec)
+
+
+select ss.product_id
+       , ifnull(abs(ss.tot17 - ss.tot18)/ss.tot17 * 100,0) as pct_diff
+from (
+select product_id
+      ,sum(case when year(transaction_date) = '2017' then store_sales else 0 end) as tot17
+      , sum(case when year(transaction_date) = '2018' then store_sales else 0 end) as tot18
+      , sum(store_sales) as tot
+from 
+    sales
+group by product_id
+)  ss
+;
+
+------------+----------+
+| product_id | pct_diff |
++------------+----------+
+|          1 |  76.9231 |
+|          2 | 443.0000 |
+|          3 |   0.0000 |
+|          4 |   0.0000 |
+|          5 | 100.0000 |
+|          6 | 100.0000 |
+|          7 | 100.0000 |
+|          8 |   0.0000 |
+|          9 |   0.0000 |
+|         10 |   9.0526 |
++------------+----------+
+10 rows in set (0.00 sec)
+
+
+3) list all customers who live in a state orderd by number of unique products they bought
+------------------------------------------------------------------------------------------
+
+
+select 
+     c.customer_id,c.first_name, c.last_name, count(distinct product_id) as unique_products
+from customers c
+   , sales s
+where state = 'CA'
+and s.customer_id = c.customer_id
+group by c.customer_id, c.first_name, c.last_name
+order by count(distinct product_id) desc
+;
++-------------+------------+-----------+-----------------+
+| customer_id | first_name | last_name | unique_products |
++-------------+------------+-----------+-----------------+
+|         452 | Mendel     | Roland    |               4 |
+|         111 | Kavitha    | Rayanki   |               2 |
++-------------+------------+-----------+-----------------+
+2 rows in set (0.00 sec)
+
+
+select 
+     c.customer_id, c.state, count(distinct product_id) as unique_products
+from customers c
+   , sales s
+where  s.customer_id = c.customer_id
+group by c.customer_id,c.state
+order by count(distinct product_id) desc
+
++-------------+-------+-----------------+
+| customer_id | state | unique_products |
++-------------+-------+-----------------+
+|         452 | CA    |               4 |
+|         447 | MN    |               3 |
+|         111 | CA    |               2 |
+|         445 | NY    |               2 |
+|         446 | NY    |               2 |
+|         455 | AZ    |               1 |
+|         450 | NY    |               1 |
+|         456 | AZ    |               1 |
+|         448 | WA    |               1 |
++-------------+-------+-----------------+
+
+
+4) count the number of products which sold more than 10 units
+----------------------------------------------------------------
+
+select count(*) as no_of_products
+from
+(select product_id
+from sales
+group by product_id
+having sum(unit_sold)>10
+) sold_10_more
+;
+
+----------------+
+| no_of_products |
++----------------+
+|              9 |
++----------------+
+1 row in set (0.00 sec)
+
+
+# if the unit_sold more than 10 units is per transaction.
+
+select count(*)
+ from 
+ (select count(product_id) from sales where unit_sold > 10 group by product_id) ss;
+
+ +----------+
+| count(*) |
++----------+
+|        8 |
++----------+
+
+select product_id, max(case when unit_sold > 10 then 1 else 0 end) as count_of_products
+from sales
+group by product_id
+;
+
+sum(case when unit_sold > 10 then 1 else 0 end) as count_of_products
+from sales
+;
+
+5) Count the number of stores in a state with grand total ? 25000 sq feet
+-------------------------------------------------------------------------
+
+select name,state,sum(area_sqft)
+from stores
+group by name,state
+having sum(area_sqft) >= 25000
+;
+
+
++-----------+-------+----------------+
+| name      | state | sum(area_sqft) |
++-----------+-------+----------------+
+| amazon    | WA    |         200000 |
+| target    | MN    |          35000 |
+| walgreens | CA    |          25000 |
+| walmart   | AZ    |          50000 |
++-----------+-------+----------------+
+4 rows in set (0.00 sec)
+
+6) Get the areas from which we have products sold.
+-------------------------------------------------
+
+select s.product_id,t.state
+from sales  s
+    , stores t
+where s.store_id = t.store_id
+and s.product_id = 1
+group by s.product_id, t.state
+;
+
+elect s.product_id,t.state
+from sales  s
+    , stores t
+where s.store_id = t.store_id
+and s.product_id = 1
+group by s.product_id, t.state
+;
+
+------------+-------+
+| product_id | state |
++------------+-------+
+|          1 | AZ    |
+|          1 | CA    |
+|          1 | MN    |
+|          1 | WA    |
++------------+-------+
+4 rows in set (0.00 sec)
+
+
+----------------------------------------------------------
+no of apples and oranges sold in a day
+-----------------------------------------------------
+select * from fruits;
++------------+--------+------------+
+| day        | name   | sold_units |
++------------+--------+------------+
+| 2018-01-01 | apple  |         10 |
+| 2018-01-01 | orange |         20 |
+| 2018-01-02 | applee |          5 |
+| 2018-01-02 | apple  |          5 |
+| 2018-01-02 | orange |        100 |
+| 2018-01-03 | apple  |         90 |
++------------+--------+------------+
+6 rows in set (0.00 sec)
+
+
+select day
+      , max(case when name ='apple' then sold_units else 0 end ) as apples_sold
+      , max(case when name ='orange' then sold_units else 0 end ) as oranges_sold
+from fruits
+group by day
+;
+
++------------+-------------+--------------+
+| day        | apples_sold | oranges_sold |
++------------+-------------+--------------+
+| 2018-01-01 |          10 |           20 |
+| 2018-01-02 |           5 |          100 |
+| 2018-01-03 |          90 |            0 |
++------------+-------------+--------------+
+3 rows in set (0.00 sec)
+
+

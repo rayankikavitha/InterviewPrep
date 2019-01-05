@@ -1,0 +1,214 @@
+create table emp(  
+  empno    int(4),  
+  ename    varchar(10),  
+  job      varchar(9),  
+  mgr      int(4),  
+  hiredate date,  
+  sal      int(7),  
+  comm     int(7),  
+  deptno   int(2),  
+  constraint pk_emp primary key (empno),  
+  constraint fk_deptno foreign key (deptno) references dept (deptno)  
+)
+
+
+create table dept(  
+  deptno     int(2),  
+  dname      varchar(14),  
+  loc        varchar(13),  
+  constraint pk_dept primary key (deptno)  
+)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+------+------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal  | comm | deptno |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250 |  500 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-08-08 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1987-07-13 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.00 sec)
+
+mysql> select * from dept;
++--------+------------+----------+
+| deptno | dname      | loc      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+4 rows in set (0.00 sec)
+
+###################################
+# ranking
+1) top 3 salaries by each department
+
+select e.empno, e.ename,e.sal, e.deptno
+from emp e
+where 2 >= ( select count(distinct e1.sal) from emp e1 where e1.sal > e.sal and e1.deptno = e.deptno)
+order by 4, 3 desc
+;
+
+
+
+
+
+########################################
+2) Department highest salary
+
+ select d.name as 'Department'
+      , e.name as 'Employee'
+      , Salary
+from Employee e
+    join Department  d 
+    on e.DepartmentId = d.Id
+
+where ( d.Id, e.Salary  ) in 
+(
+select DepartmentID, max(Salary)
+from Employee 
+group by DepartmentId
+) 
+;
+
+
+3)3rd highest salary - Given an employee salary table. EmpId, Salary, DeptId
+
+select EmpId, Salary
+from Emp h
+where 3 <= ( select count(*)
+ 			from Emp l
+ 			where e.Salary <= h.Salary
+            )
+
+
+
+
+
+-------------------------------------------------------------
+
+List employees (names) who have a bigger salary than their boss
+-------+-------+----------+------+------------+------+------+--------+
+| empno | ename | job      | mgr  | hiredate   | sal  | comm | deptno |
++-------+-------+----------+------+------------+------+------+--------+
+|  7369 | SMITH | CLERK    | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600 |  300 |     30 |
++-------+-------+----------+------+------------+------+------+--------+
+
+select e1.ename
+from emp e1
+   , emp e2
+where e1.sal > e2.sal
+and e1.mgr = e2.empno
+;
+
++-------+
+| ename |
++-------+
+| SCOTT |
+| FORD  |
++-------+
+
+List employees who have the biggest salary in their departments
+-------------------------------------------------------------
+select e2.ename
+from emp e2
+where (e2.deptno, e2.sal) in 
+(
+select e1.deptno, max(e1.sal)
+from emp e1
+group by e1.deptno
+);
+
++-------+
+| ename |
++-------+
+| BLAKE |
+| SCOTT |
+| KING  |
+| FORD  |
++-------+
+  
+
+
+
+List departments that have less than 3 people in it
+-------------------------------------------
+
+select d.deptno
+from dept  d 
+    left join emp e on e.deptno = d.deptno
+group by e.deptno
+having count(e.deptno) < 3;
+
++--------+
+| deptno |
++--------+
+|     40 |
++--------+
+
+
+
+List all departments along with the number of people there (tricky - people often do an "inner join" leaving out empty departments)
+------------------------------------------------------------------------------------------------------------------------------
+select d.deptno, coalesce(count(e.empno),0)
+from dept d
+   left join emp e on e.deptno = d.deptno
+group by d.deptno
+;
+--------+----------------------------+
+| deptno | coalesce(count(e.empno),0) |
++--------+----------------------------+
+|     10 |                          3 |
+|     20 |                          5 |
+|     30 |                          6 |
+|     40 |                          0 |
++--------+----------------------------+
+4 rows in set (0.00 sec)
+
+
+
+List employees that don't have a boss in the same department
+-------------------------------------------------------------
+select e1.ename
+from emp e1
+    , emp e2
+where e1.mgr = e2.empno
+and e1.deptno != e2.deptno
+;
++-------+
+| ename |
++-------+
+| JONES |
+| BLAKE |
++-------+
+
+List all departments along with the total salary there
+------------------------------------------------------
+select d.deptno, coalesce(sum(e.sal),0) as tot_sal
+from dept d
+     left join emp e on e.deptno = d.deptno
+group by d.deptno
+;
+
++--------+---------+
+| deptno | tot_sal |
++--------+---------+
+|     10 |    8750 |
+|     20 |   10875 |
+|     30 |    9400 |
+|     40 |       0 |
++--------+---------+
+
