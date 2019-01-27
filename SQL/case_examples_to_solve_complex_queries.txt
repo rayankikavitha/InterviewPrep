@@ -1,3 +1,5 @@
+# case examples to solve complex queries from SQL book
+
 create table emp(  
   empno    int(4),  
   ename    varchar(10),  
