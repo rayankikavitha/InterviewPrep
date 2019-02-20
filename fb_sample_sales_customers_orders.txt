@@ -1,0 +1,283 @@
+fb_sample_sales_customers_orders.txt
+
+salesperson	
+ID	Name	Age	Salary
+1	Abe	61	140000
+2	Bob	34	44000
+5	Chris	34	40000
+7	Dan	41	52000
+8	Ken	57	115000
+11	Joe	38	38000
+
+Customer
+ID	Name	City	Industry Type
+4	Samsonic	pleasant	J
+6	Panasung	oaktown	J
+7	Samony	jackson	B
+9	Orange	Jackson	B
+
+Orders
+Number	order_date	cust_id	salesperson_id	Amount
+10	8/2/96	4	2	2400
+20	1/30/99	4	8	1800
+30	7/14/95	9	1	460
+40	1/29/98	7	2	540
+50	2/3/98	6	7	600
+60	3/2/98	6	7	720
+70	5/6/98	9	7	150
+
+
+  Given the tables above,  find the following:
+a. The names of all salespeople that have an order with Samsonic.
+b. The names of all salespeople that do not have any order with Samsonic.
+c. The names of salespeople that have 2 or more orders.
+d. The names and ages of all salespersons must having a salary of 100,000 or greater.
+e. What sales people have sold more than 1400 total units?
+f. When was the earliest and latest order made to Samony?
+
+
+insert into salesperson values
+(1,	'Abe',	61,	140000),
+(2,	'Bob',	34,	44000),
+(5,	'Chris',34,	40000),
+(7,	'Dan',	41,	52000),
+(8,	'Ken',	57,	115000),
+(11,'Joe',	38,	38000);
+
+insert into customer values
+(4,	'Samsonic',	'pleasant' ,'J'),
+(6,	'Panasung',	'oaktown'	,'J'),
+(7,	'Samony',	'jackson'	,'B'),
+(9,	'Orange',	'Jackson'	,'B');
+
+insert into orders values
+(10,	'1996-08-02'	,4,	2,	2400),
+(20,	'1999-01-30'	,4,	8,	1800),
+(30,	'1995-07-14'	,9,	1,	460),
+(40,	'1998-01-29'	,7,	2,	540),
+(50,	'1998-02-03'	,6,	7,	600),
+(60,	'1998-03-02'	,6,	7,	720),
+(70,	'1998-05-06'	,9,	7,	150);
+
+
+CREATE TABLE SALESPERSON (
+          ID INTEGER PRIMARY KEY
+          ,NAME  VARCHAR(30)
+          ,AGE INTEGER
+          ,SALARY INTEGER
+          );
+        
+CREATE TABLE CUSTOMER (
+  ID INTEGER PRIMARY KEY
+  ,NAME VARCHAR(30)
+  ,CITY VARCHAR(30)
+  , TYPE VARCHAR(30)
+  );
+
+
+CREATE TABLE ORDERS (
+    NUMBER INTEGER 
+   ,ORDER_DATE DATE
+   ,CUST_ID INTEGER 
+   ,SALESPERSON_ID INTEGER
+   ,AMOUNT DECIMAL
+   );
+
+
+
+Given the tables above,  find the following:
+
+a. The names of all salespeople that have an order with Samsonic.
+-----------------------------------------------------------------
+
+select s.name
+from salesperson s
+   , orders o
+   , customer  c
+where s.id = o.salesperson_id
+and o.cust_id = c.id
+and c.name like 'Samsonic'
+group by s.name                -> # if the orders has duplicates at different dates
+;
++------+
+| name |
++------+
+| Bob  |
+| Ken  |
++------+
+
+
+
+
+b. The names of all salespeople that do not have any order with Samsonic.
+-------------------------------------------------------------------------
+
+select s.name
+from salesperson s
+   left join orders o on o.salesperson_id = s.id.  -> left join
+   left join  customer c on o.cust_id = c.id
+group by s.name
+having max(case when c.name = 'Samsonic' then 1 else 0 end) = 0 
+;
+
+++-------+
+| name  |
++-------+
+| Abe   |
+| Chris |
+| Dan   |
+| Joe   |
++-------+
+
+# names of all salespeople, that have an order but not with samsonic
+
+
+select s.name.   
+from salesperson s
+   join orders o on o.salesperson_id = s.id.   ->. full join
+    join customer c on o.cust_id = c.id
+group by s.name
+having max(case when c.name = 'Samsonic' then 1 else 0 end) = 0 
+;
+
++------+
+| name |
++------+
+| Abe  |
+| Dan  |
++------+
+
+
+# approach
+
+select s.name
+    ,(case when c.name = 'Samsonic' then 1 else 0 end). <--- try case statment in the select to see the output first so you can apply appropriate aggregate condition.
+from salesperson s
+   , orders o
+   , customer c
+where s.id = o.salesperson_id
+and o.cust_id = c.id
+;
+
+
+
+c. The names of salespeople that have 2 or more orders.
+-------------------------------------------------------
+
+# join first and then filter
+
+select s.name
+from salesperson s
+    , orders o
+where s.id = o.salesperson_id
+group by s.name
+having count(*) >=2;
+
++------+
+| name |
++------+
+| Bob  |
+| Dan  |
++------+
+
+# filter and then join
+
+select sp.Name
+     from SalesPerson sp
+     ,(select o.salesperson_id, count(*) as cnt
+    from Orders o
+    group by o.salesperson_id 
+    having cnt >=2) as two_or_more
+    where sp.ID = two_or_more. salesperson_id;
+
+
+d. The names and ages of all salespersons must having a salary of 100,000 or greater.
+------------------------------------------------------------------------------------------
+select s.name , s.age
+from salesperson s
+where salary >= 100000
+;
++------+------+
+| name | age  |
++------+------+
+| Abe  |   61 |
+| Ken  |   57 |
++------+------+
+
+e. What sales people have sold more than 1400 total units?
+------------------------------------------------------------
+
+select s.id,s.name
+from salesperson s
+  join orders o on o.salesperson_id = s.id
+group by s.id, s.name
+having sum(amount) > 1400
+;
+
++----+------+
+| id | name |
++----+------+
+|  2 | Bob  |
+|  7 | Dan  |
+|  8 | Ken  |
++----+------+
+
+f. When was the earliest and latest order made to Samony?
+------------------------------------------------------------
+
+select min(o.order_date) as earliest
+      , max(o.order_date) as latest
+  from orders o
+      join customer c on c.id = o.cust_id
+ group by c.id, c.name
+ having c.name like 'Samony'
+ ;
+
+ +------------+------------+
+| earliest   | latest     |
++------------+------------+
+| 1998-01-29 | 1998-01-29 |
++------------+------------+
+
+select min(o.order_date) as earliest
+      , max(o.order_date) as latest
+  from orders o
+      join customer c on c.id = o.cust_id
+ group by c.id, c.name
+ having c.name like 'Samsonic'
+ ;
+
++------------+------------+
+| earliest   | latest     |
++------------+------------+
+| 1996-08-02 | 1999-01-30 |
++------------+------------+
+
+
+select c.name, min(o.order_date), max(o.order_date)
+      from orders o
+         , customer c
+     where o.cust_id = c.id
+     group by c.id, c.name;
+
+
+----------+-------------------+-------------------+
+| name     | min(o.order_date) | max(o.order_date) |
++----------+-------------------+-------------------+
+| Samsonic | 1996-08-02        | 1999-01-30        |
+| Panasung | 1998-02-03        | 1998-03-02        |
+| Samony   | 1998-01-29        | 1998-01-29        |
+| Orange   | 1995-07-14        | 1998-05-06        |
++----------+-------------------+-------------------+
+4 rows in set (0.00 sec)
+
+g. find the largest order amount for each salesperson and the associated order number, along with the customer to whom that order belongs to
+--------------------------------------------------------------------------------------------------------------------
+
+select o.salesperson_id, o.cust_id
+from salesperson s
+     , orders o
+ where o.salesperson_id = s.id
+  and o.amount = ( select max(x.amount) from orders x where x.salesperson_id = o.salesperson_id group by x.salesperson_id )
+  ;
+
