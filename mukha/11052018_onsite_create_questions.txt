@@ -1,3 +1,540 @@
+Round 1)
+Conversion for 4 events ( open a session, upload photo, comment, finish)
+If a product manager asks you , how can you improve the process, what can you improve?
+a) calculate the average time it takes one step to another step across all sessions.
+  duration = from step 1 to first occurence of the following step.
+  So, after step 1, step 2 can happen multiple times, but you calculate the difference with first occurence.
+
+b) ratio of open events moving to finish step.
+c) Do the same thing in python
+
+session id, user_id, step_id, timestamp
+
+x1, 101, 1, 20
+x1 , 101, 2, 22
+x1, 101, 2, 23
+x1, 101, 4, 25
+x1, 101, 3, 26 
+
+x2, 101, 1, 30
+x2, 101, 2, 32
+x2, 101, 1, 33
+
+Round 2)
+
+Vikas
+
+1) when the monthly active users count decreases or increases how do you investigate
+ - Specifically looking for population metrics, how do you narrow down to the missing/increasing population
+
+2) How do you calculate L7 ( given a input like this ?
+
+input = { "android":[1,1,0,0,0,1,0] ,
+              "ios":[1,0,1,1,0,0,1],
+           "laptop":[0,0,0,0,1,1,0]
+       }
+
+ category = {. "mobile": ["ios","android"]
+               ,everything = ["ios","android","laptop"]
+
+ }
+
+ output = { "mobile ": [1,1,1,1,0,1,1,], everything :[1,1,1,1,1,1,1]
+       }
+
+============================================================================
+
+3) SQL  using outer join make sure use coalescue
+
+how to derive these poeple from the below table
+
+ac - active user
+churn 
+retention - comeing back but who didn't visit yesterday
+first time user
+
+users_time
+
+date, user_id, first_ts, last_ts, prev_latest_ts
+1/1		1        1/1	   1/1.     -        - first time user
+1/2   1        1/1        1/2       1/1      - 
+1/3.  2         1/1/2015    1/3        1/1   < retention record ( last_ts, prev_last_ts diff is less than 1)
+1/4.  3	 		1/1/2014.   1/1/2015.    12/01/2014.   <- churn. ( more than 1 day)
+
+ysql> select * from users_table;
++------------+---------+------------+------------+----------------+
+| date       | user_id | first_ts   | last_ts    | prev_latest_ts |
++------------+---------+------------+------------+----------------+
+| 2019-01-01 | 1       | 2019-01-01 | 2019-01-01 | NULL           |
+| 2019-01-02 | 1       | 2019-01-01 | 2019-01-02 | 2019-01-01     |
+| 2019-01-03 | 2       | 2019-01-01 | 2019-01-03 | 2019-01-01     |
+| 2019-01-04 | 3       | 2018-01-01 | 2019-01-04 | 2019-01-01     |
++------------+---------+------------+------------+----------------+
+4 rows in set (0.00 sec)
+mysql> select * from daily_log;
++---------+--------------+
+| user_id | logging_date |
++---------+--------------+
+| 1       | 2019-01-01   |
+| 1       | 2019-01-02   |
+| 1       | 2019-01-03   |
+| 2       | 2019-01-01   |
+| 2       | 2019-01-03   |
+| 3       | 2019-01-01   |
+| 3       | 2019-01-04   |
+| 4       | 2019-01-01   |
++---------+--------------+
+8 rows in set (0.00 sec)
+
+How do identify a user is active user , churn, retention, first time user by using the above table.
+
+select date
+     , count(case when prev_latest_ts is Null then 1 else 0 end ) as total_first_time_users     
+     , 
+
+from     users_time
+group by date
+; 
+
+4) given an another table log where 
+
+daily_log
+user_id logging_Date
+1     1/1
+2.    1/2
+1     2/1
+
+mysql> select * from daily_log order by user_id;
++---------+--------------+
+| user_id | logging_date |
++---------+--------------+
+| 1       | 2019-01-01   |
+| 1       | 2019-01-02   |
+| 1       | 2019-01-03   |
+| 2       | 2019-01-01   |
+| 2       | 2019-01-03   |
+| 3       | 2019-01-01   |
+| 3       | 2019-01-04   |
+| 3       | 2019-01-06   |
+| 4       | 2019-01-01   |
++---------+--------------+
+9 rows in set (0.00 sec)
+
+how do you update users_time? write a query to insert the next line in the row.
+
+
+
+
+create table prev_day as
+select  current_date
+      , d1.user_id
+      , min(d1.logging_date) as first_ts
+      , max(d1.logging_date)  as last_ts
+from daily_log d1
+# where logging_date < current_date
+group by d1.user_id order by d1.user_id;
+
+
++--------------+---------+------------+------------+
+| current_date | user_id | first_ts   | last_ts    |
++--------------+---------+------------+------------+
+| 2019-02-07   | 1       | 2019-01-01 | 2019-01-03 |
+| 2019-02-07   | 2       | 2019-01-01 | 2019-01-03 |
+| 2019-02-07   | 3       | 2019-01-01 | 2019-01-06 |
+| 2019-02-07   | 4       | 2019-01-01 | 2019-01-01 |
++--------------+---------+------------+------------+
+4 rows in set (0.02 sec)
+you have to look at the previous rows, to derive first_ts, prev_latest_ts
+#daily_log gets refreshed every day, which means new row will be inserted.
+After inserting an extra row in daily_log:
+mysql> insert into daily_log values (2,'2019-01-21');
+Query OK, 1 row affected (0.01 sec)
+
+create view timestamp_table as 
+select  current_date
+      , curr.user_id
+      , coalesce(prev.first_ts, curr.logging_date)  as first_ts
+      , coalesce(max(curr.logging_date), prev.last_ts) as last_ts 
+      , case when DAY(prev.last_ts - prev.first_ts) = 0 then NULL
+              else prev.last_ts   
+        end                   as prev_latest_ts 
+from daily_log curr
+left join prev_day prev on prev.user_id = curr.user_id
+group by curr.user_id order by curr.user_id;
+
+
++--------------+---------+------------+------------+----------------+
+| current_date | user_id | first_ts   | last_ts    | prev_latest_ts |
++--------------+---------+------------+------------+----------------+
+| 2019-02-08   | 1       | 2019-01-01 | 2019-01-03 | 2019-01-03     |
+| 2019-02-08   | 2       | 2019-01-01 | 2019-01-22 | 2019-01-21     |
+| 2019-02-08   | 3       | 2019-01-01 | 2019-01-06 | 2019-01-06     |
+| 2019-02-08   | 4       | 2019-01-01 | 2019-01-01 | NULL           |
++--------------+---------+------------+------------+----------------+
+4 rows in set, 3 warnings (0.00 sec)
+
+# Using single query to create timestamp table from daily_log with out intermediate table or views
+
+
+# Now write a query to find out active user, churn, first_time_user and retention - coming back but who didn't visit yesterday
+
+select user_id
+      , case when prev_latest_ts is NULL then 'first_timer'
+             when DAY(last_ts - prev_latest_ts) <= 1 then 'active_user'
+             when DAY(last_ts - prev_latest_ts) > 1 and DAY(last_ts - prev_latest_ts) < 3 then 'retention'
+             else 'churn'
+        end  as user_type
+  from timestamp_table;
+
+# count the users for the above category
+
+select sum(case when prev_latest_ts is NULL then 1 else 0 ) as first_timers
+      , sum(case when )
+
+4 rows in set (0.02 sec)
+select date,
+    , coalescu( prev)
+
+from daily_log   d
+outer join users_time   u
+on  u.user_id = d.user_id
+
+=================================================================================================================
+
+Round 3)
+
+1_ uber/lyft car riding services.
+  Talk about a advantages and disadvantages of having a single dimension for riders and drivers.
+
+   fact is trip, grain is daily
+
+   dimensions -> riders, drivers, time ,location, vehicle
+
+   sql questions
+
+   1) average wait time per day for the rider per week
+   2) people who used uber only for airport ( either pickup or dropoff)
+   3) count the number of people who drove from specific zipcode. 
+     A-> B is counted 1 for A
+     B -> A is counted 1  for A
+     A-> A should be counted 1  for A
+   4) no. of peoole who used uber for airport per week.
+   5) no.of drivers who drove more than 4 hours per week ( including gaps )
+
+   Table:
+
+   trip id, driver_id, rider_id, pickup_loc_id, dropoff_loc_id,fare
+
+dimentions:
+riders - > id, name, user_id, password, reviews
+drivers -> id, name, dob, dl
+time -> id, timestamp, day, month, day_of_the_week, year
+location -> id, lat, long, bounding_box, city, neighborhood, type
+vehicle -> id, vin, model, make, year, color
+fact:
+trip -> trip_id, rider_id, driver_id, vehicle_id, req_time_id,pickup_time_id, pickup_location_id, dropoff_time_id, dropoff_location_id
+
+1) average wait time per day for the rider per week
+# since the grain is per day average gives wait time per day.
+select 
+       t.rider_id
+      , avg(tr.timestamp - tp.timestamp) as avg
+from trip t
+join time tr on tr.id = t.req_time_id
+join time pr on pr.id = t. pickup_time_id
+group by t.rider_id
+; 
+
+2) people who used uber "only" for the airport, that means they didn't ride Uber for any other rides
+
+select count(t.id)
+from trip t
+join on location l on l.id = t.location_id
+having max( case when l.type in ('aiport') then 1 else -2) = 1
+
+   
+   select     sum(case when tair then 1
+                 else -1 
+               )
+
+               sum(case when t.cno in ('CS112') then 1 else 2 end) = 1
+    from trip tair
+     join trip tall on tall.id = tair.id 
+     join location lair on lair.id = tair.location_id 
+     join location lall on lall.id = tall.locaation_id
+where lair.type ='airport'
+and lall.type != 'airport'
+
+
+
+
+
+
+# this is just gives uber trips from/to airport.
+select
+       sum( case when 
+          else 0 ) as cnt_trips_to_airport
+from fact t
+join location l1 on l1.id = t.pickup_location_id 
+join location l2 on l2.id = t.dropof_location_id 
+
+
+3) count the number of people who drove from specific zipcode. 
+     A-> B is counted 1 for A
+     B -> A is counted 1  for A
+     A-> A should be counted 1  for A
+
+  select 
+        , sum ( case when l1.zipcode = 'A' and l2.zipcode !='A' then 1
+                     when l1.zipcode !='A' and l2.zipcode = 'A' then 1
+                     when l1.zipcode ='A' and l2.zipcode ='A' then 1
+                else 0
+            )
+  from trip t
+   join location l1 on l1.location_id = t.pickup_location_id 
+   join location l2 on l2.location_id = t.dropoff_location_id 
+   where l1.zipcode ='A' or l2.zipcode ='A'
+
+ 4) no. of peoole who used uber only for airport per week.
+ select count(*)
+ from (
+   select min( case when l1.type ='airport' or l2.type = 'airport' then 1 else  0 end )  as analysis
+         , t.rider_id
+   from trip t
+   join location l1 on l1.id = t.pickup_location_id
+   join location l2 on  l2.id = t.dropoff_location_id
+   group by t.rider_id
+   having analysis >= 1 ) temp
+
+   
+
+ 5) no. of drivers who drove more then 4 hours per week including gaps
+
+   select week
+        , sum( pt.dropoff - dt.pickup_time ) as drive_time
+
+   from trip t
+   join driver d on d.id = t.driver_id
+   join time pt on pt.id = t.pickup_time_id
+   join time dt on dt.id = t.dropoff_time_iod
+   group by  week
+   having drive_time > 4 
+==========================================================
+Uber data model creation.
+
+trip -> trip_id, rider_id, driver_id, vehicle_id, req_time_id,pickup_time_id, pickup_location_id, dropoff_time_id, dropoff_location_id
+
+create table trip 
+( trip_id   int(6),
+  rider_id  int(6),
+  driver_id int(6),
+  vehicle_id int(6),
+  req_time_id  int(6),
+  pickup_time_id int(6),
+  dropoff_time_id int(6),
+  pickup_location_id int(6),
+  dropoff_location_id int(6),
+  constraint pk_id primary key (trip_id)
+);
+
+create table riders
+( id   int(6),
+  name varchar(30),
+  user_id varchar(30),
+  passwd varchar(30),
+  rating int(4)
+);
+
+create table drivers
+(id int(6),
+name varchar(30),
+dob date,
+dl varchar(30)
+);
+
+create table time
+(id  int(6),
+ timestamp  timestamp,
+ day  varchar(30),
+ month varchar(30),
+ day_of_the_week varchar(30),
+ year varchar(30)
+);
+
+create table location
+(id int(6),
+latitude varchar(30),
+longitude varchar(30),
+boundingbox varchar(30),
+city  varchar(30),
+neigh varchar(30),
+zipcode varchar(30),
+type varchar(30)
+);
+
+create table vehicle
+(
+id int(6),
+vin int(10),
+model varchar(30),
+make varchar(30),
+year varchar(30),
+color varchar(30)
+);
+
+
+update table trip (
+constraint fk_rider_id foreign key (rider_id) references rider (id),
+  constraint fk_driver_id foreign key (driver_id) references driver (id),
+  constraint fk_vehicl_id foreign key (vehicle_id) references vehicle (id)
+  );
+
+insert into riders values (1,'kavitha','kr','password',4);
+insert into riders values (2,'sreeni','kr','password',4);
+insert into riders values (3,'pooja','kr','password',4);
+insert into riders values (4,'amrutha','kr','password',4);
+insert into riders values (5,'goutham','kr','password',4);
+insert into riders values (6,'shilpa','kr','password',4);
+insert into riders values (7,'lahari','kr','password',4);
+insert into riders values (8,'srihari','kr','password',4);
+insert into riders values (9,'ramesh','kr','password',4);
+insert into riders values (10,'neeraja','kr','password',4);
+insert into riders values (11,'varsha','kr','password',4);
+insert into riders values (12,'lakshmi','kr','password',4);
+
+insert into drivers values(1,'john','1970-01-01','vx1231');
+insert into drivers values(2,'james','1970-01-01','vx1232');
+insert into drivers values(3,'alex','1970-01-01','vx1233');
+insert into drivers values(4,'bob','1970-01-01','vx1234');
+insert into drivers values(5,'scott','1970-01-01','vx1235');
+insert into drivers values(6,'chris','1970-01-01','vx1236');
+insert into drivers values(7,'newsom','1970-01-01','vx1237');
+insert into drivers values(8,'jared','1970-01-01','vx1238');
+insert into drivers values(9,'gavin','1970-01-01','vx1239');
+insert into drivers values(10,'dan','1970-01-01','vx12310');
+
+
+insert into vehicle values(1,001,'corolla','toyota','2000','silver');
+insert into vehicle values(2,002,'odyssey','honda','2000','red');
+insert into vehicle values(3,003,'crv','honda','2000','grey');
+insert into vehicle values(4,004,'camry','toyota','2000','black');
+insert into vehicle values(5,005,'altima','nissan','2000','green');
+insert into vehicle values(6,006,'leaf','nissan','2000','silver');
+insert into vehicle values(7,007,'models','tesla','2000','black');
+insert into vehicle values(8,008,'modelc','tesla','2000','blue');
+insert into vehicle values(9,009,'fusion','ford','2000','silver');
+insert into vehicle values(10,010,'malibu','chevy','2000','black');
+
+
+insert into time values(1,'2019-01-01 00:00:00', '2019-01-01',1, 'Mon', '2019');
+insert into time values(2,'2019-01-01 00:20:00', '2019-01-01',1, 'Mon', '2019');
+insert into time values(3,'2019-01-01 00:40:00', '2019-01-01',1, 'Mon', '2019');
+insert into time values(4,'2019-01-01 01:00:00', '2019-01-01',1, 'Mon', '2019');
+insert into time values(5,'2019-01-01 01:20:00', '2019-01-01',1, 'Mon', '2019');
+insert into time values(6,'2019-01-01 01:40:00', '2019-01-01',1, 'Mon', '2019');
+insert into time values(7,'2019-01-01 02:00:00', '2019-01-01',1, 'Mon', '2019');
+insert into time values(8,'2019-01-01 02:20:00', '2019-01-01',1, 'Mon', '2019');
+insert into time values(9,'2019-01-01 02:40:00', '2019-01-01',1, 'Mon', '2019');
+insert into time values(10,'2019-01-01 03:00:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(11,'2019-01-01 03:20:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(12,'2019-01-01 03:40:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(13,'2019-01-01 04:00:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(14,'2019-01-01 04:20:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(15,'2019-01-01 04:40:00', '2019-01-01',1, 'Tue', '2019');
+nsert into time values(16,'2019-01-01 05:00:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(17,'2019-01-01 05:20:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(18,'2019-01-01 05:40:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(19,'2019-01-01 06:00:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(20,'2019-01-01 06:20:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(21,'2019-01-01 06:40:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(22,'2019-01-01 07:00:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(23,'2019-01-01 07:20:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(24,'2019-01-01 07:40:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(25,'2019-01-01 08:00:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(26,'2019-01-01 08:20:00', '2019-01-01',1, 'Tue', '2019');
+insert into time values(27,'2019-01-01 09:40:00', '2019-01-01',1, 'Tue', '2019');
+
+insert into location values(1,30,60,null,'sunnyvale','serra',94087,'neighborhood');
+insert into location values(2,30,60,null,'sunnyvale','nimitz',94087,'neighborhood');
+insert into location values(3,30,60,null,'sunnyvale','westvalley',94087,'neighborhood');
+insert into location values(4,30,60,null,'fremont','mission',84087,'neighborhood');
+insert into location values(5,30,60,null,'fremont','irvington',84087,'neighborhood');
+insert into location values(6,30,60,null,'milbrae','milbrae',84087,'airport');
+insert into location values(7,30,60,null,'mountainview','south mountainview',84087,'hospital');
+insert into location values(8,30,60,null,'sanjose','sanjose',84087,'airport');
+insert into location values(9,30,60,null,'sanfranicsco','financialdistrict',84087,'city');
+insert into location values(10,30,60,null,'mountainview','caltrain',84087,'rail station');
+
+
+
+
+
+
+
+create table location
+(id int(6),
+latitude varchar(30),
+longitude varchar(30),
+boundingbox varchar(30),
+city  varchar(30),
+neigh varchar(30),
+zipcode varchar(30),
+type varchar(30)
+);
+# kavitha going from sunnyvale to sfo,airport,mountainview
+insert into trip values(1,1,1,1,1,2,3,1,9);
+insert into trip values(2,1,1,1,2,3,4,1,1);
+insert into trip values(3,1,1,1,3,4,5,1,2);
+insert into trip values(4,1,1,1,4,5,6,1,3);
+insert into trip values(5,1,1,1,5,6,7,1,4);
+insert into trip values(6,1,1,1,6,7,8,1,5);
+insert into trip values(7,1,1,1,7,8,9,1,6);
+insert into trip values(8,1,1,1,8,9,10,1,7);
+# sreeni going to airport only
+insert into trip values(9,2,2,2,1,2,3,1,6);
+insert into trip values(10,2,3,3,2,3,4,1,6);
+# ramesh going to airport only
+insert into trip values(11,9,2,2,1,2,3,4,6);
+
+create table trip 
+( trip_id   int(6),
+  rider_id  int(6),
+  driver_id int(6),
+  vehicle_id int(6),
+  req_time_id  int(6),
+  pickup_time_id int(6),
+  dropoff_time_id int(6),
+  pickup_location_id int(6),
+  dropoff_location_id int(6),
+  constraint pk_id primary key (trip_id)
+);
+
+=============================================================================
+
+Feedback and thoughts:
+
+1) first round was ok, remaining 2 rounds improve SQL and Python, behavior was ok.
+2)  My reflection:
+   1) on behavior, elaborate on kohl's marketing strategy : you could have elaborated more
+   2) case statements practice.
+   3) when doing outer joins, use coalease for missing values to catch NULLs.
+3) Demensional modelling 
+
+
+Important book mark links:
+
+
+
+
+
+
+
+
+
+
+
+
+
 # create users_table
 
 date, user_id, first_ts, last_ts, prev_latest_ts
