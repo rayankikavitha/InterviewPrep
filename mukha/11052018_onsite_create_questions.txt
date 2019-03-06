@@ -246,11 +246,12 @@ group by t.rider_id
 ; 
 
 2) people who used uber "only" for the airport, that means they didn't ride Uber for any other rides
+# should give 2 people
 
 select count(t.id)
 from trip t
 join on location l on l.id = t.location_id
-having max( case when l.type in ('aiport') then 1 else -2) = 1
+having max( case when l.type in ('aiport') then 1 else -2 end) = 1
 
    
    select     sum(case when tair then 1
@@ -284,16 +285,14 @@ join location l2 on l2.id = t.dropof_location_id
      B -> A is counted 1  for A
      A-> A should be counted 1  for A
 
-  select 
-        , sum ( case when l1.zipcode = 'A' and l2.zipcode !='A' then 1
-                     when l1.zipcode !='A' and l2.zipcode = 'A' then 1
-                     when l1.zipcode ='A' and l2.zipcode ='A' then 1
-                else 0
-            )
+   
+   select   sum(case when l1.zipcode = '94087' or l2.zipcode ='94087' then 1
+                     else 0
+                end) as count_specifc_people
   from trip t
-   join location l1 on l1.location_id = t.pickup_location_id 
-   join location l2 on l2.location_id = t.dropoff_location_id 
-   where l1.zipcode ='A' or l2.zipcode ='A'
+   join location l1 on l1.id = t.pickup_location_id 
+   join location l2 on l2.id = t.dropoff_location_id 
+   where l1.zipcode ='94087' and  l2.zipcode ='94087'
 
  4) no. of peoole who used uber only for airport per week.
  select count(*)
@@ -312,12 +311,26 @@ join location l2 on l2.id = t.dropof_location_id
 
    select week
         , sum( pt.dropoff - dt.pickup_time ) as drive_time
-
+        , driver_id
    from trip t
    join driver d on d.id = t.driver_id
    join time pt on pt.id = t.pickup_time_id
    join time dt on dt.id = t.dropoff_time_iod
    group by  week
+   having drive_time > 4 
+
+   # lets do it for a month ( no.of drivers who drove more then 4 hrs per month including gaps
+   # gaps means you need to look for first pick up time and last drop off time.)
+
+   select month
+         , driver_id
+        , min()
+
+   from trip t
+   join driver d on d.id = t.driver_id
+   join time pt on pt.id = t.pickup_time_id
+   join time dt on dt.id = t.dropoff_time_iod
+   group by  month
    having drive_time > 4 
 ==========================================================
 Uber data model creation.
@@ -495,6 +508,9 @@ insert into trip values(9,2,2,2,1,2,3,1,6);
 insert into trip values(10,2,3,3,2,3,4,1,6);
 # ramesh going to airport only
 insert into trip values(11,9,2,2,1,2,3,4,6);
+#long trip to airport
+insert into trip values(12,2,1,1,1,7,22,1,6);
+insert into trip values(13,1,2,1,1,7,22,1,6);
 
 create table trip 
 ( trip_id   int(6),
