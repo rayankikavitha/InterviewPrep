@@ -290,6 +290,34 @@ select s1.*
           from student s2
           where s2.age < s1.age )
 
+select sno, sname
+       , dense_rank() over (order by age) as rnk
+  from student 
+  where rnk >2
+
+select *
+from (
+  select sno, sname
+       , dense_rank() over (order by age) as rnk
+  from student 
+ ) t where t.rnk > 2
+--------------
+
++------+---------+-----+
+| sno  | sname   | rnk |
++------+---------+-----+
+|    1 | AARON   |   3 |
+|    3 | DOUG    |   3 |
+|    8 | KAY     |   3 |
+|    9 | GILLIAN |   3 |
+|    2 | CHUCK   |   4 |
+|    7 | BRIAN   |   4 |
+|   10 | CHAD    |   4 |
+|    5 | STEVE   |   5 |
++------+---------+-----+
+8 rows in set (0.00 sec)
+
+Bye
 
 # I guess 3 self joins is preferred as it is guaranteed 3 scans, compared to 
 # n scans ( n is the 

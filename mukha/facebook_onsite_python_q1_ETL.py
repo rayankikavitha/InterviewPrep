@@ -12,6 +12,26 @@ input = { "android":[1,1,0,0,0,1,0] ,
        }
  if any day is 1, then populate 1 in the output.
 """
+import collections as collections
+from functools import reduce
+
+def call7(input,category):
+    #result=collections.defaultdict(list)
+    result={}
+    newresult={}
+    for category_key,category_val in category.items():
+        if category_key not in result:
+            result[category_key] =[0]*7
+            for each_category_val in category_val:
+                #result[category_key]= list(zip(result[category_key],input[each_category_val]))
+                result[category_key]= list(map(max,result[category_key],input[each_category_val]))
+
+    print (result)
+
+print(call7(input,category))
+
+
+
 from collections import defaultdict
 
 def calculate_L7(input, category):

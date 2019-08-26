@@ -62,8 +62,58 @@ order by 4, 3 desc
 ;
 
 
+################################
+in case of rank function
 
 
+# top 3 salaries by each department
+
+select * from employees;
+select t.*
+from (
+select e.department_id, e.first_name, e.last_name, e.salary
+  , dense_rank() over (partition by department_id order by e.salary desc) as rnk
+from employees e
+) t where t.rnk <= 3
+;
+
+
+###############################
+
+Difference between dense_rank() and rank()
+
+RANK gives you the ranking within your ordered partition. Ties are assigned the same rank, with the next ranking(s) skipped. So, if you have 3 items at rank 2, the next rank listed would be ranked 5. DENSE_RANK again gives you the ranking within your ordered partition, but the ranks are consecutive.
+CREATE TABLE t AS
+SELECT 'a' v FROM dual UNION ALL
+SELECT 'a'   FROM dual UNION ALL
+SELECT 'a'   FROM dual UNION ALL
+SELECT 'b'   FROM dual UNION ALL
+SELECT 'c'   FROM dual UNION ALL
+SELECT 'c'   FROM dual UNION ALL
+SELECT 'd'   FROM dual UNION ALL
+SELECT 'e'   FROM dual;
+
+SELECT
+  v,
+  ROW_NUMBER() OVER (ORDER BY v) row_number,
+  RANK()       OVER (ORDER BY v) rank,
+  DENSE_RANK() OVER (ORDER BY v) dense_rank
+FROM t
+ORDER BY v;
+The above will yield:
+
++---+------------+------+------------+
+| V | ROW_NUMBER | RANK | DENSE_RANK |
++---+------------+------+------------+
+| a |          1 |    1 |          1 |
+| a |          2 |    1 |          1 |
+| a |          3 |    1 |          1 |
+| b |          4 |    4 |          2 |
+| c |          5 |    5 |          3 |
+| c |          6 |    5 |          3 |
+| d |          7 |    7 |          4 |
+| e |          8 |    8 |          5 |
++---+------------+------+------------+
 
 ########################################
 2) Department highest salary
@@ -93,7 +143,16 @@ where 3 <= ( select count(*)
  			where e.Salary <= h.Salary
             )
 
+top 3 salaries
 
+With CTE_EMP AS 
+(
+Select d.Name AS Department, e.Name as Employee, e.Salary,
+ ROW_NUMBER() over (partition by DepartmentId order by Salary desc) AS RowNumber
+From Employee e
+JOIN Department d on d.Id = e.DepartmentId
+)
+Select Department, Employee, Salary FROM CTE_EMP Where RowNumber <= 3
 
 
 

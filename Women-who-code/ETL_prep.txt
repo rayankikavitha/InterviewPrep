@@ -1,0 +1,31 @@
+"""
+Before we can dive into our task pipeline, we need to introduce generators in Python. The best way to do this is with an example.
+
+In the previous mission, we would read in the example_log.txt file, and write it to a list. Recall that when creating a list, Python loads each element of the list into RAM. For files that exceed multiple gigabytes, this file loading can cause a program to run out of memory.
+
+Instead of reading the file into memory, we can take advantage of file streaming. File streaming works by breaking a file into small sections (called chunks), and then loaded one at time into memory. Once a chunk has been exhausted (all the bytes of that chunk has been read), Python requests the next chunk, and then that chunk is loaded into memory to be iterated on.
+
+This is abstracted away when you run the following:
+
+with open('example_log.txt') as file:
+    for line in file:
+        # The file acts like an iterator.
+        print(line)
+We can see evidence of exhausted bytes if you try to read from the opened file again:
+with open(example_log.txt) as file:
+    for line in file:
+        do_something()​
+    # At this point, the file has been read and
+    # no unread bytes are remaining.
+    for line in file:
+        # The `file` is empty and the loop ends
+        # immediately.
+        do_something()
+This stream-like behavior is extremely helpful when working with large data sets. We can replicate this behavior with other iterators with the use of generators. A generator is an iterable object that is created from a generator function.
+
+The generator function differs from a regular function by two important differences:
+
+A generator uses yield, instead of return.
+Local variables are kept in memory until the generator completes.
+Here's a simple example of a generator that calculates the squares of each number up to N:
+"""

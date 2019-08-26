@@ -35,31 +35,6 @@ d. The names and ages of all salespersons must having a salary of 100,000 or gre
 e. What sales people have sold more than 1400 total units?
 f. When was the earliest and latest order made to Samony?
 
-
-insert into salesperson values
-(1,	'Abe',	61,	140000),
-(2,	'Bob',	34,	44000),
-(5,	'Chris',34,	40000),
-(7,	'Dan',	41,	52000),
-(8,	'Ken',	57,	115000),
-(11,'Joe',	38,	38000);
-
-insert into customer values
-(4,	'Samsonic',	'pleasant' ,'J'),
-(6,	'Panasung',	'oaktown'	,'J'),
-(7,	'Samony',	'jackson'	,'B'),
-(9,	'Orange',	'Jackson'	,'B');
-
-insert into orders values
-(10,	'1996-08-02'	,4,	2,	2400),
-(20,	'1999-01-30'	,4,	8,	1800),
-(30,	'1995-07-14'	,9,	1,	460),
-(40,	'1998-01-29'	,7,	2,	540),
-(50,	'1998-02-03'	,6,	7,	600),
-(60,	'1998-03-02'	,6,	7,	720),
-(70,	'1998-05-06'	,9,	7,	150);
-
-
 CREATE TABLE SALESPERSON (
           ID INTEGER PRIMARY KEY
           ,NAME  VARCHAR(30)
@@ -82,6 +57,32 @@ CREATE TABLE ORDERS (
    ,SALESPERSON_ID INTEGER
    ,AMOUNT DECIMAL
    );
+
+insert into SALESPERSON values
+(1,	'Abe',	61,	140000),
+(2,	'Bob',	34,	44000),
+(5,	'Chris',34,	40000),
+(7,	'Dan',	41,	52000),
+(8,	'Ken',	57,	115000),
+(11,'Joe',	38,	38000);
+
+insert into CUSTOMER values
+(4,	'Samsonic',	'pleasant' ,'J'),
+(6,	'Panasung',	'oaktown'	,'J'),
+(7,	'Samony',	'jackson'	,'B'),
+(9,	'Orange',	'Jackson'	,'B');
+
+insert into ORDERS values
+(10,	'1996-08-02'	,4,	2,	2400),
+(20,	'1999-01-30'	,4,	8,	1800),
+(30,	'1995-07-14'	,9,	1,	460),
+(40,	'1998-01-29'	,7,	2,	540),
+(50,	'1998-02-03'	,6,	7,	600),
+(60,	'1998-03-02'	,6,	7,	720),
+(70,	'1998-05-06'	,9,	7,	150);
+
+
+
 
 
 

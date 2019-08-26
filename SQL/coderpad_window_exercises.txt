@@ -1,0 +1,206 @@
+/*
+CoderPad provides a basic SQL sandbox with the following schema.
+You can also use commands like `show tables` and `desc employees`
+
+employees                             projects
++---------------+---------+           +---------------+---------+
+| id            | int     |<----+  +->| id            | int     |
+| first_name    | varchar |     |  |  | title         | varchar |
+| last_name     | varchar |     |  |  | start_date    | date    |
+| salary        | int     |     |  |  | end_date      | date    |
+| department_id | int     |--+  |  |  | budget        | int     |
++---------------+---------+  |  |  |  +---------------+---------+
+                             |  |  |
+departments                  |  |  |  employees_projects
++---------------+---------+  |  |  |  +---------------+---------+
+| id            | int     |<-+  |  +--| project_id    | int     |
+| name          | varchar |     +-----| employee_id   | int     |
++---------------+---------+           +---------------+---------+
+
+
+SELECT e.first_name, e.last_name, e.salary,
+  d.name as department_name
+FROM employees   AS e
+JOIN departments AS d ON e.department_id = d.id;
+--------------------------------------------------
+USE CODERPAD SANDBOX
+
+select d.name
+,avg(e.salary) over (partition by e.department_id) as dept_avg
+,avg(e.salary) over () as total_avg
+from employees e
+join departments d on d.id = e.department_id
+;
++-------------+------------+------------+
+| name        | dept_avg   | total_avg  |
++-------------+------------+------------+
+| Reporting   | 20000.0000 | 35000.0000 |
+| Engineering | 43333.3333 | 35000.0000 |
+| Engineering | 43333.3333 | 35000.0000 |
+| Engineering | 43333.3333 | 35000.0000 |
+| Marketing   | 50000.0000 | 35000.0000 |
+| Silly Walks | 10000.0000 | 35000.0000 |
++-------------+------------+------------+
+6 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------
+ Given the tables above,  find the following:
+a. The names of all salespeople that have an order with Samsonic.
+b. The names of all salespeople that do not have any order with Samsonic.
+c. The names of salespeople that have 2 or more orders.
+d. The names and ages of all salespersons must having a salary of 100,000 or greater.
+e. What sales people have sold more than 1400 total units?
+f. When was the earliest and latest order made to Samony?
+
+
+insert into salesperson values
+(1,	'Abe',	61,	140000),
+(2,	'Bob',	34,	44000),
+(5,	'Chris',34,	40000),
+(7,	'Dan',	41,	52000),
+(8,	'Ken',	57,	115000),
+(11,'Joe',	38,	38000);
+
+insert into customer values
+(4,	'Samsonic',	'pleasant' ,'J'),
+(6,	'Panasung',	'oaktown'	,'J'),
+(7,	'Samony',	'jackson'	,'B'),
+(9,	'Orange',	'Jackson'	,'B');
+
+insert into orders values
+(10,	'1996-08-02'	,4,	2,	2400),
+(20,	'1999-01-30'	,4,	8,	1800),
+(30,	'1995-07-14'	,9,	1,	460),
+(40,	'1998-01-29'	,7,	2,	540),
+(50,	'1998-02-03'	,6,	7,	600),
+(60,	'1998-03-02'	,6,	7,	720),
+(70,	'1998-05-06'	,9,	7,	150);
+
+
+CREATE TABLE SALESPERSON (
+          ID INTEGER PRIMARY KEY
+          ,NAME  VARCHAR(30)
+          ,AGE INTEGER
+          ,SALARY INTEGER
+          );
+        
+CREATE TABLE CUSTOMER (
+  ID INTEGER PRIMARY KEY
+  ,NAME VARCHAR(30)
+  ,CITY VARCHAR(30)
+  , TYPE VARCHAR(30)
+  );
+
+
+CREATE TABLE ORDERS (
+    NUMBER INTEGER 
+   ,ORDER_DATE DATE
+   ,CUST_ID INTEGER 
+   ,SALESPERSON_ID INTEGER
+   ,AMOUNT DECIMAL
+   );
+
+FROM CODERPAD SANDBOX
+
+#. The names of salespeople that have 2 or more orders.
+
+   SELECT T.NAME,T.CNT
+ FROM (
+  SELECT S.NAME
+     , COUNT(*) OVER (PARTITION BY O.SALESPERSON_ID) AS CNT
+ FROM SALESPERSON S
+ JOIN ORDERS O ON O.SALESPERSON_ID = S.ID
+  ORDER BY CNT
+  ) T
+  WHERE T.CNT >=2
+--------------
+
++------+-----+
+| NAME | CNT |
++------+-----+
+| Bob  |   2 |
+| Bob  |   2 |
+| Dan  |   3 |
+| Dan  |   3 |
+| Dan  |   3 |
++------+-----+
+5 rows in set (0.00 sec)
+
+--------------
+# RANK THE SALES ORDER
+
+
+SELECT S.NAME
+        , O.AMOUNT
+     , RANK() OVER (ORDER BY O.SALESPERSON_ID, O.AMOUNT) AS SALESPERSON_RNK
+ FROM SALESPERSON S
+ JOIN ORDERS O ON O.SALESPERSON_ID = S.ID
+  ORDER BY SALESPERSON_RNK DESC
+--------------
+
++------+--------+-----------------+
+| NAME | AMOUNT | SALESPERSON_RNK |
++------+--------+-----------------+
+| Ken  |   1800 |               7 |
+| Dan  |    720 |               6 |
+| Dan  |    600 |               5 |
+| Dan  |    150 |               4 |
+| Bob  |   2400 |               3 |
+| Bob  |    540 |               2 |
+| Abe  |    460 |               1 |
++------+--------+-----------------+
+7 rows in set (0.00 sec)
+
+Bye
+
+-----------------------------------------------------------------------
+
+RANK () BASED ON ORDER AMOUNT AND CUMULATIVE ORDER SUM
+
+SELECT S.NAME
+        , O.AMOUNT
+     , RANK() OVER (ORDER BY O.AMOUNT DESC) AS SALESPERSON_RNK
+     , SUM(O.AMOUNT) OVER (PARTITION BY O.SALESPERSON_ID ) AS SALESPERSON_ORDER_TOTAL
+     , SUM(O.AMOUNT) OVER ()  AS TOT_SUM
+ FROM SALESPERSON S
+ JOIN ORDERS O ON O.SALESPERSON_ID = S.ID
+ ORDER BY SALESPERSON_ORDER_TOTAL
+  ;
+ +------+--------+-----------------+-------------------------+---------+
+| NAME | AMOUNT | SALESPERSON_RNK | SALESPERSON_ORDER_TOTAL | TOT_SUM |
++------+--------+-----------------+-------------------------+---------+
+| Abe  |    460 |               6 |                     460 |    6670 |
+| Dan  |    150 |               7 |                    1470 |    6670 |
+| Dan  |    720 |               3 |                    1470 |    6670 |
+| Dan  |    600 |               4 |                    1470 |    6670 |
+| Ken  |   1800 |               2 |                    1800 |    6670 |
+| Bob  |   2400 |               1 |                    2940 |    6670 |
+| Bob  |    540 |               5 |                    2940 |    6670 |
++------+--------+-----------------+-------------------------+---------+
+7 rows in set (0.00 sec)
+
+Bye
+
+--------------
+SELECT S.NAME
+       , SUM(O.AMOUNT) OVER (PARTITION BY S.ID ) AS TOT_AMOUNT_PER_SALESPERSON
+       , SUM(O.AMOUNT) OVER (ORDER BY S.NAME RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ) AS RUNNING_TOTAL
+       , SUM(O.AMOUNT) OVER (ORDER BY S.NAME  RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING) AS RUNNING_TOTAL_BACKWARDS
+       ,SUM(O.AMOUNT) OVER (ORDER BY S.NAME  RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS TOTAL
+       
+  FROM ORDERS O
+  JOIN SALESPERSON S ON S.ID = O.SALESPERSON_ID
+--------------
+
++------+----------------------------+---------------+-------------------------+-------+
+| NAME | TOT_AMOUNT_PER_SALESPERSON | RUNNING_TOTAL | RUNNING_TOTAL_BACKWARDS | TOTAL |
++------+----------------------------+---------------+-------------------------+-------+
+| Abe  |                        460 |           460 |                    6670 |  6670 |
+| Bob  |                       2940 |          3400 |                    6210 |  6670 |
+| Bob  |                       2940 |          3400 |                    6210 |  6670 |
+| Dan  |                       1470 |          4870 |                    3270 |  6670 |
+| Dan  |                       1470 |          4870 |                    3270 |  6670 |
+| Dan  |                       1470 |          4870 |                    3270 |  6670 |
+| Ken  |                       1800 |          6670 |                    1800 |  6670 |
++------+----------------------------+---------------+-------------------------+-------+
+7 rows in set (0.00 sec)
