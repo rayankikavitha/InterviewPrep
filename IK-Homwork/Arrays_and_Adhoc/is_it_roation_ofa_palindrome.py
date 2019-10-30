@@ -1,3 +1,16 @@
+
+"""
+optimal solution, concate the is_rotate string and check the original string in it
+
+"""
+def is_it_rotation(str1, str2):
+	newstr= str1+str2
+	if newstr.find(str1) == -1 :
+		return False
+	else:
+		return True
+
+
 """
 aab
 return = True

@@ -15,7 +15,7 @@ def join_words(words):
     values=[]
     for i,word in enumerate(words):
         d[word[::-1]] = i
-    print d
+    #print d
     for i,word in enumerate(words):
         for j in range(len(word)+1):
 
@@ -24,20 +24,22 @@ def join_words(words):
             #print prefix, postfix
 
             if prefix in d and d[prefix] != i and postfix == postfix[::-1]:
-                print "first",prefix, postfix
+                #print "first",prefix, postfix
                 result.append((i,d[prefix]))
             if j > 0 and postfix in d and i != d[postfix] and prefix == prefix[::-1]:
-                print "second",prefix, postfix
+                #print "second",prefix, postfix
                 result.append((d[postfix], i))
 
     for each in result:
         values.append((words[each[0]], words[each[1]]))
-    return values
+    return values,result
 
 given1 = [ 'bat','tab','cat']
 given2 = ['ab','deedba']
-print join_words(given1)
-print join_words(given2)
+given3 = ['geekf', 'geeks', 'or','keeg', 'abc', 'bc'];
+print (join_words(given1))
+print (join_words(given2))
+print (join_words(given3))
 
 
 

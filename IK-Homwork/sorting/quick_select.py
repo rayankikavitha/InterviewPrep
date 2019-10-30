@@ -27,7 +27,7 @@ def partition(alist,first,last):
 
 
    return rightmark
-
+  
 def quick_select(nums, k):
     pi = partition(nums, 0, len(nums) - 1)
 

@@ -1,0 +1,47 @@
+
+schema:
+
+Input:
+Table name : booking
+listing_id
+booking_amount
+ds - date time stamp
+
+
+Output:
+
+listing_id
+booking_amount_90days_lookback
+booking_amount_365days_lookback
+booking_amount_total
+
+Imagine the data is batch and partitioned on datetimestamp
+
+1) find 90 days, 365 days ,total booking amount for a listing
+2) How do you find the same thing 90days, 365day, total today? 
+   Note: Use yesterday's dump to derive today's
+   So, you need to find changes only.
+   Thoughts/Answers. 
+   Since we have 90 days dump already, add current date listing_id details to the dump
+   and remove the 91sth old amount.
+3) How to enhance this to automate it to run it for last 7 days, last 1 month , last quarter
+4) Now imagine some one says that database is stale after a week how do you redo this entire work?
+  - Thoughts:
+5) How to python ETL "for finding something " from this data
+
+
+
+================================
+insert into dump from (
+select listing_id
+     , sum ( case when date(ds) >= (current-date -90) then booking_amount else 0 end) as booking_amount_90days_lookback
+     , sum ( case when date(ds) >= (current-date -365) then booking_amount else 0 end) as booking_amount_365days_lookback
+     , sum ( booking_amount) as booking_amount_total
+from booking
+group by listing_id
+);
+
+finding changes:
+
+select 
+

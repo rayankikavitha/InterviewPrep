@@ -49,7 +49,7 @@ class Trie():
         currentNode = currentPath[-1]
         if currentNode.isTerminal:
             word = ''.join([node.letter for node in currentPath])
-            print indent + word + ' ' + str(currentNode.positions)
+            print (indent + word + ' ' + str(currentNode.positions))
             indent += '  '
         for letter, node in sorted(currentNode.children.items()):
             self.output(currentPath[:] + [node], indent)
@@ -114,7 +114,7 @@ def BoggleWords(grid, dictpointer):
 #Example usage:
 
 d= MakeTrie("geeks for quiz go")
-print d
-print d.root.children
+print (d)
+print (d.root.children)
 print BoggleWords(["giz","uek","qse"],d.root)
 print BoggleWords(["giz","uek","qse"],d.root)

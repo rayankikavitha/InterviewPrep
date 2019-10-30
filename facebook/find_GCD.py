@@ -13,15 +13,15 @@ def gcd2( a, b):
     else:
         return gcd(b, a % b)
 
-print gcd(24,36)
+print (gcd(24,36))
 
-print gcd(120,100)
+#print gcd(120,100)
 
-print gcd(98,56)
+#print gcd(98,56)
 
-print gcd2(4,6)
+#print gcd2(4,6)
 
-print gcd(4,6)
+#print gcd(4,6)
 
 def gcd_of_list(nums):
     g = gcd(nums[0],nums[1])

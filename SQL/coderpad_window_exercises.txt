@@ -126,6 +126,29 @@ FROM CODERPAD SANDBOX
 +------+-----+
 5 rows in set (0.00 sec)
 
+# same as above, but to remove duplicates
+# sales persons who sold more than 2 transactions
+
+SELECT T.NAME,T.CNT
+ FROM (
+  SELECT S.NAME
+     , COUNT(*) OVER (PARTITION BY O.SALESPERSON_ID) AS CNT
+
+ FROM SALESPERSON S
+ JOIN ORDERS O ON O.SALESPERSON_ID = S.ID
+  ORDER BY CNT
+  ) T
+  WHERE T.CNT >=2 
+  GROUP BY T.NAME;
+
+  +------+-----+
+| NAME | CNT |
++------+-----+
+| Bob  |   2 |
+| Dan  |   3 |
++------+-----+
+2 rows in set (0.00 sec)
+
 --------------
 # RANK THE SALES ORDER
 
@@ -153,8 +176,39 @@ SELECT S.NAME
 
 Bye
 
------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+# list first unique transactions between sales person and customer
+# list first transaction for sales person and customer
+#  very important ################
 
+SELECT *
+FROM (
+SELECT C.NAME AS CNAME
+     , O.ORDER_DATE
+     , S.NAME  AS SNAME
+     , RANK() OVER ( PARTITION BY S.ID ORDER BY ORDER_DATE) AS SALES_ORDER
+     , RANK() OVER (PARTITION BY C.ID ORDER BY ORDER_DATE) AS CUSTOMER_ORDER
+FROM ORDERS O
+JOIN CUSTOMER C on C.ID = O.CUST_ID
+JOIN SALESPERSON S ON S.ID = O.SALESPERSON_ID
+  ) T
+  WHERE T.SALES_ORDER =1 AND T.CUSTOMER_ORDER  =1
+--------------
+
++----------+------------+-------+-------------+----------------+
+| CNAME    | ORDER_DATE | SNAME | SALES_ORDER | CUSTOMER_ORDER |
++----------+------------+-------+-------------+----------------+
+| Samsonic | 1996-08-02 | Bob   |           1 |              1 |
+| Panasung | 1998-02-03 | Dan   |           1 |              1 |
+| Orange   | 1995-07-14 | Abe   |           1 |              1 |
++----------+------------+-------+-------------+----------------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+-----------------------------------------------------------------------------------------------
 RANK () BASED ON ORDER AMOUNT AND CUMULATIVE ORDER SUM
 
 SELECT S.NAME
@@ -204,3 +258,23 @@ SELECT S.NAME
 | Ken  |                       1800 |          6670 |                    1800 |  6670 |
 +------+----------------------------+---------------+-------------------------+-------+
 7 rows in set (0.00 sec)
+
+
+select e.id, e.first_name, e.last_name, e.salary
+ ,avg(e.salary) over (order by e.id range between  1 preceding and  1 following ) as moving_avg
+ from employees e
+ order by e.id
+--------------
+
++----+------------+-----------+--------+------------+
+| id | first_name | last_name | salary | moving_avg |
++----+------------+-----------+--------+------------+
+|  1 | John       | Smith     |  20000 | 15000.0000 |
+|  2 | Ava        | Muffinson |  10000 | 20000.0000 |
+|  3 | Cailin     | Ninson    |  30000 | 20000.0000 |
+|  4 | Mike       | Peterson  |  20000 | 43333.3333 |
+|  5 | Ian        | Peterson  |  80000 | 50000.0000 |
+|  6 | John       | Mills     |  50000 | 65000.0000 |
++----+------------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+

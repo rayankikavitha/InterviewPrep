@@ -1,0 +1,110 @@
+
+1) how to get changes only data: You have already 90 days of dump, I just want to get changes only
+2) Second question. 
+  How to do backup/retrofit if some one said source is wrong and you need to re-do your work for the last 7 days.
+3) python ETL for the above thing
+
+
+Architecture:
+
+1) How do you get total number of nights airbnb has on NY city for the new years eve ( look for specific dating for 2018 only)
+2) How do project NY customer stays for the future years
+3) total guests in a particular listing id
+4) 
+
+Answer
+
+
+select id_lisiting
+    case when 
+from full_file f
+join bookings b on b.listing_id = f.listing_id
+where ds = current_date
+
+
+
+
+
+
+
+
+insert into listing_books from (
+select id_listing, *
+ from 
+ (
+select
+      id_listing
+    , sum(m_bookings) over (partition by id_listing order by ds rows between 90 days preceding and current row) as nbookings_past_90_days
+    , sum(m_bookings) over ( partition by id_listing  rows between 365 days preceding and current row) as nbookings_past_90_days
+    , sum(m_bookings) over (order by id_listing) as n_bookings_total
+
+ from bookings
+ where current_date -ds <= n
+ ) ) group by id_listing
+
+
+
+
+full file:
+
+select  id_listing
+      , sum (case when ds > current_date  - 90 then m_bookings else 0 end ) as nbookings_past_90 days
+      , sum (case when ds > current_date  - 365 then m_bookings else 0 end ) as nbookings_past_365 days
+      , sum (m_bookings) as n_bookings_total
+
+from bookings
+group by id_listing
+
+
+past_90 days
+
+
+
+
+
+
+select  id_listing
+      , mbookings  as past_90_booking
+     
+from bookings
+where ds = DAYS(current_date - 90)
+group by id_listing
+
+past_365_days:
+
+select  id_listing
+      , mbookings  as past_365_booking
+     
+from bookings
+where ds = DAYS(current_date - 90)
+group by id_listing
+
+
+changes: ongoing
+
+select  id_listing
+      , nbookings_past_90 + m_bookings - past_90day_booking
+      , nbookings_past_365 + mbookings - past_365day_booking
+      , n_bookings_total  + mbookings 
+
+from bookings
+join past_90 p on p.id_lisiting = b.id_listing
+join past_365 on p.
+, join full_file on id_listing = id
+where booking_2
+group by id_listing
+
+
+
+
+select  id_listing
+      , m_bookings
+
+from bookings
+where ds >= current_date - n days
+and ds <= current_date -n days
+
+
+
+
+p

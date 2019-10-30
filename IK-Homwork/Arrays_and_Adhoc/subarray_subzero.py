@@ -32,7 +32,8 @@ def find_subarray_sumzero(nums):
         s += nums[i]
         if s not in d:
             d[s] = i
-        else:
+        else:def function():
+            pass
             return True
     print d
     return False

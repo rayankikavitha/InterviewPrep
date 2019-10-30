@@ -21,7 +21,7 @@ print "Maximum contiguous sum is", maxSubArraySum(a)
 
 # This code is contributed by _Devesh Agrawal_
 
-s = "The dog walks"
+s = "The    dog     walks"
 #output ="ehT god sklaw'
 
 def reverse_sentence(s):
@@ -31,3 +31,20 @@ def reverse_sentence(s):
     return res
 
 print reverse_sentence(s)
+
+def reversestr(s,start,end):
+    while start < end:
+        s[start],s[end] = s[end],s[start]
+        start +=1
+        end -=1
+
+
+
+def reverse_sentence_preserve_spaces(s):
+    i, j = 0, len(s)-1
+    reversestr(s,i,j)
+    for i in range(len(s)-1):
+        if s[i+1]
+
+
+
