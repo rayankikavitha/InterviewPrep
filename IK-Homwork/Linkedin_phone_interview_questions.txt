@@ -1,0 +1,11 @@
+1) If you Hive query is stuck at reducer 99% for a long timeWhere do you investigate when the reducer stucks at 99%
+  1) mapper
+  2) joins
+  3)sorting and shuffling
+2) 
+Explain, manager, job, executor, task, stage, in the Spark Architecture
+3) Explain groupby and reduceby in the spark map reduce job.
+3) Merge a sorted array B into sorted array A, A has space to hold B
+4) Find first non repeating character in a string
+
+

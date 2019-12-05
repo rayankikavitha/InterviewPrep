@@ -20,7 +20,7 @@ def scanwishlist(wishlists):
 
 
 
-
+# find the buddyes for a guest if they match more than 50% wish list items
 def buddymap(wishlists, guest):
 	bucket = scanwishlist(wishlists)
 	if guest not in bucket:

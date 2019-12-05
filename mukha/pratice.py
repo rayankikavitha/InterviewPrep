@@ -1,3 +1,6 @@
+
+
+
 #no.of times substring appears in a string
 print "no.of times substring appears ina  string"
 s = "abcabcdefabcdefgh"

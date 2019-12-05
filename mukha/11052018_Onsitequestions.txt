@@ -60,10 +60,20 @@ date, user_id, first_ts, last_ts, prev_latest_ts
 1/3.  2         1/1/2015    1/3        1/1   < retention record ( last_ts, prev_last_ts diff is less than 1)
 1/4.  3	 		1/1/2014.   1/1/2015.    12/01/2014.   <- churn. ( more than 1 day)
 
-How do identify a user is active user , churn, retention, first time user by using the above table.
+How do identify a user is active user , churn, retention, first time user by using the above tab
 
 select date
-     , count(case when prev_latest_ts is Null then 1 else 0 end ) as total_first_time_users     
+    , case when prev_latest_ts is null then 'first_time_user'
+       when last_ts - prev_latest_ts = 1   then 'active_user'
+       when last_ts - prev_latest_ts = 2 then 'retention_user'
+       when last_ts - prev_latest_ts > 2 then 'churn'
+      end as user_type
+from timestamp_table;
+
+
+select date
+     , count(case when prev_latest_ts is Null then 1 else 0 end ) as total_first_time_users 
+
      , 
 
 from     users_time

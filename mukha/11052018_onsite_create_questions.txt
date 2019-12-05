@@ -186,6 +186,16 @@ select user_id
         end  as user_type
   from timestamp_table;
 
+select user_id
+      , case when prev_latest_ts is NULL then 'first_timer'
+             when DAY(last_ts - prev_latest_ts) <= 1 then 'active_user'
+             when DAY(last_ts - prev_latest_ts) = 2 then 'retention'
+             else 'churn'
+        end  as user_type
+  from timestamp_table;
+
+
+
 # count the users for the above category
 
 select sum(case when prev_latest_ts is NULL then 1 else 0 ) as first_timers

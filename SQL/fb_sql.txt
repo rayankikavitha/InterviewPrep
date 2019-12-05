@@ -1,4 +1,4 @@
-#*********************************************************
+selecsele#*********************************************************
 CREATE TABLE PRODUCTS (
           PRODUCT_ID INTEGER PRIMARY KEY
         , PRODUCT_CLASS_ID  INTEGER
@@ -159,8 +159,25 @@ where sales.customer_id = customers.customer_id
 +--------+------------+------------+
 2 rows in set (0.00 sec)
 
+mysql> create view young_old as select  gender,min(birthdate) as oldest, max(birthdate) as youngest
+    -> from sales,
+    -> customers
+    -> where sales.customer_id = customers.customer_id
+    ->  group by gender;
+Query OK, 0 rows affected (0.01 sec)
 
-
+mysql> select c.gender
+,max(case when c.birthdate = yo.oldest then concat(c.first_name,c.last_name) else NULL end ) as oldest
+,max(case when c.birthdate = yo.youngest then concat(c.first_name,c.last_name) else NULL end )as youngest
+ from customers c join young_old yo on yo.gender = c.gender 
+  group by c.gender;
++--------+-----------------+----------------+
+| gender | oldest          | youngest       |
++--------+-----------------+----------------+
+| F      | MendelRoland    | KavithaRayanki |
+| M      | FeuerAlexander  | ChoiYu         |
++--------+-----------------+----------------+
+2 rows in set (0.00 sec)
 
 
 select c.gender
